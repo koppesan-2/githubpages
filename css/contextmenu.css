@@ -1,0 +1,22 @@
+#context_div_main{
+    display: none;
+    position: fixed;
+    left:0px;
+    top: 0px;
+    border: 1px solid #000;
+    background-color: #fff;
+    border-radius: 5px;
+    appearance: none;
+    padding: 3px;
+}
+.context_li_button{
+    padding: 2px;
+    width: 200px;
+    min-height:30px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+.context_li_button:hover{
+    background-color: #f8af41;
+}
