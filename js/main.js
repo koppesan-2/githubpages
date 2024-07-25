@@ -1,5 +1,11 @@
 window.addEventListener("DOMContentLoaded",function(){
     context_init();
+    var context_funcjs = document.createElement("script");
+    context_funcjs="js/func/contextmenu_func.js";
+    document.body.appendChild(context_funcjs);
+    var context_js=document.createElement("script");
+    context_funcjs="js/contextmenu.js";
+    document.body.appendChild(context_funcjs);
 })
 document.getElementById("contextchangep").addEventListener("contextmenu",function(){
     if (context_isopen==false){
