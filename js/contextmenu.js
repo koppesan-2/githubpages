@@ -54,8 +54,9 @@ function context_remove(){
     context_ul.remove();
     context_init();
 }
-function context_change_color(fg_color,bg_color){
-
+function context_change_color_main(fg_color,bg_color){
+    document.documentElement.style.setProperty("--context_fg_color_main",fg_color);
+    document.documentElement.style.setProperty("--context_bg_color_main",bg_color);
 };
 function context_change_color_child(id,fg_color,bg_color,hover_color){
     if (id==""){
@@ -64,8 +65,8 @@ function context_change_color_child(id,fg_color,bg_color,hover_color){
         var context_change_class=document.querySelectorAll(`#${id}`);
     };
     context_change_class.forEach(function(value){
-        value.setAttribute("context_hover_color",hover_color);
-        value.setAttribute("context_fg_color",fg_color);
-        value.setAttribute("context_bg_color",bg_color);
+        value.style.setProperty("--context_hover_color",hover_color);
+        value.style.setProperty("--context_fg_color",fg_color);
+        value.style.setProperty("--context_bg_color",bg_color);
     })
 };

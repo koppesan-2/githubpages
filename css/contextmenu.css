@@ -1,18 +1,25 @@
+:root{
+    --context_fg_color_main:#000;
+    --context_bg_color_main:#fff;
+    --context_hover_color:#f8af41;
+    --context_fg_color:#000;
+    --context_bg_color:#fff;
+}
 #context_div_main{
     display: none;
     position: fixed;
     left:0px;
     top: 0px;
     border: 1px solid #000;
-    color: "#"attr(context_fg_color);
-    background-color: "#"attr(context_bg_color);
+    color: var(--context_fg_color_main);
+    background-color: var(--context_bg_color_main);
     border-radius: 5px;
     appearance: none;
     padding: 3px;
 }
 .context_li_button{
-    color: "#"attr(context_fg_color);
-    background-color: "#"attr(context_bg_color);
+    color: var(--context_fg_color);
+    background-color: var(--context_bg_color);
     padding: 2px;
     width: 200px;
     min-height:30px;
@@ -21,5 +28,5 @@
     user-select: none;
 }
 .context_li_button:hover{
-    background-color: "#"attr(context_hover_color);
+    background-color: var(--context_hover_color);
 }
