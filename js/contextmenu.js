@@ -54,3 +54,12 @@ function context_remove(){
     context_ul.remove();
     context_init();
 }
+function context_change_color(fg_color,bg_color){
+
+};
+function context_change_color_child(id,fg_color,bg_color,hover_color){
+    var context_change_class=document.querySelectorAll(".context_li_button")
+    context_change_class.forEach(function(value){
+        value.style
+    })
+};

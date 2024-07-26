@@ -4,7 +4,8 @@
     left:0px;
     top: 0px;
     border: 1px solid #000;
-    background-color: #fff;
+    color: "#"attr(context_fg_color);
+    background-color: "#"attr(context_bg_color);
     border-radius: 5px;
     appearance: none;
     padding: 3px;
@@ -18,5 +19,5 @@
     user-select: none;
 }
 .context_li_button:hover{
-    background-color: #f8af41;
+    background-color: "#"attr(context_hover_color);
 }
