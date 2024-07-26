@@ -4,16 +4,18 @@
     --context_hover_color:#f8af41;
     --context_fg_color:#000;
     --context_bg_color:#fff;
+    --context_border:1px solid #000;
+    --context_radius:5px;
 }
 #context_div_main{
     display: none;
     position: fixed;
     left:0px;
     top: 0px;
-    border: 1px solid #000;
+    border: var(--context_border);
     color: var(--context_fg_color_main);
     background-color: var(--context_bg_color_main);
-    border-radius: 5px;
+    border-radius: var(--context_radius);
     appearance: none;
     padding: 3px;
 }

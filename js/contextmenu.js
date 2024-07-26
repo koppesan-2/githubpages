@@ -54,6 +54,12 @@ function context_remove(){
     context_ul.remove();
     context_init();
 }
+function context_change_border(border){
+    document.documentElement.style.setProperty("--context_border",border);
+}
+function context_change_radius(radius){
+    document.documentElement.style.setProperty("--context_radius",radius);
+}
 function context_change_color_main(fg_color,bg_color){
     document.documentElement.style.setProperty("--context_fg_color_main",fg_color);
     document.documentElement.style.setProperty("--context_bg_color_main",bg_color);
