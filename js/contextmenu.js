@@ -58,8 +58,14 @@ function context_change_color(fg_color,bg_color){
 
 };
 function context_change_color_child(id,fg_color,bg_color,hover_color){
-    var context_change_class=document.querySelectorAll(".context_li_button")
+    if (id==""){
+        var context_change_class=document.querySelectorAll(".context_li_button");
+    }else{
+        var context_change_class=document.querySelectorAll(`#${id}`);
+    };
     context_change_class.forEach(function(value){
-        value.style
+        value.setAttribute("context_hover_color",hover_color);
+        value.setAttribute("context_fg_color",fg_color);
+        value.setAttribute("context_bg_color",bg_color);
     })
 };

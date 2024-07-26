@@ -4,8 +4,8 @@ window.addEventListener("DOMContentLoaded",function(){
     context_funcjs="js/func/contextmenu_func.js";
     document.body.appendChild(context_funcjs);
     var context_js=document.createElement("script");
-    context_funcjs="js/contextmenu.js";
-    document.body.appendChild(context_funcjs);
+    context_js="js/contextmenu.js";
+    document.body.appendChild(context_js);
 })
 document.getElementById("contextchangep").addEventListener("contextmenu",function(){
     if (context_isopen==false){

@@ -11,6 +11,8 @@
     padding: 3px;
 }
 .context_li_button{
+    color: "#"attr(context_fg_color);
+    background-color: "#"attr(context_bg_color);
     padding: 2px;
     width: 200px;
     min-height:30px;
