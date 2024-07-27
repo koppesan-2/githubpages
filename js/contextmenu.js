@@ -1,16 +1,10 @@
 document.oncontextmenu=oncontextmenu;
 oncontextmenu=function(e){
     if (context_number>0){
-        let context_main_id=document.getElementById("context_div_main")
         if(context_isopen==false){
-            context_main_id.style.left=e.pageX+"px";
-            context_main_id.style.top=e.pageY+"px";
-            context_main_id.style.display="block";
-            context_main_id.classList="fadeIn";
-            context_isopen=true;
+            context_open();
         }else{
-            context_main_id.classList="fadeOut";
-            context_isopen=false;
+            context_close();
         }
     };
 }
@@ -24,9 +18,20 @@ function context_init(){
     context_div_main.appendChild(context_ul);
     document.body.appendChild(context_div_main);
     document.addEventListener("click",function(){
-        document.getElementById("context_div_main").classList="fadeOut";
-        context_isopen=false;
+        context_close()
     })
+}
+function context_open(){
+    let context_main_id=document.getElementById("context_div_main");
+    context_main_id.style.left=e.pageX+"px";
+    context_main_id.style.top=e.pageY+"px";
+    context_main_id.style.display="block";
+    context_main_id.classList="fadeIn";
+    context_isopen=true;
+}
+function context_close(){
+    document.getElementById("context_div_main").classList="fadeOut";
+    context_isopen=false;
 }
 function context_add_child(name="",innerHTML=""){
     context_number+=1;
