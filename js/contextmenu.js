@@ -2,7 +2,7 @@ document.oncontextmenu=oncontextmenu;
 oncontextmenu=function(e){
     if (context_number>0){
         if(context_isopen==false){
-            context_open();
+            context_open(e);
         }else{
             context_close();
         }
@@ -21,7 +21,7 @@ function context_init(){
         context_close()
     })
 }
-function context_open(){
+function context_open(e){
     let context_main_id=document.getElementById("context_div_main");
     context_main_id.style.left=e.pageX+"px";
     context_main_id.style.top=e.pageY+"px";
