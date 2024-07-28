@@ -81,3 +81,16 @@ function context_change_color_child(id,fg_color,bg_color,hover_color){
         value.style.setProperty("--context_bg_color",bg_color);
     })
 };
+function context_localStorage_use(bool){
+    context_can_uselocalStorage=(bool?true:false);
+}
+function context_preset_make(name,content,on_localStorage){
+    if(on_localStorage==1 && context_can_uselocalStorage==1){
+        localStorage.setItem(`context_${name}`,content)
+    }
+}
+function context_preset_remove(name,on_localStorage){
+    if(on_localStorage==1 && context_can_uselocalStorage==1){
+        localStorage.removeItem(`context_${name}`)
+    }
+}
