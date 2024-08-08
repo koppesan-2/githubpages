@@ -22,7 +22,7 @@
     <br>
     <button onclick="jishindata()">データの再読込み</button>
     <button onclick="MTAclear()">ログのクリア</button>
-    <p id="version">バージョン24.7.10-2234</p>
+    <p id="version">バージョン24.09-0739</p>
     <div id="ui-parent"><ui id="list-container"></ui></div>
 <script>
     function jishindata(){
@@ -46,7 +46,7 @@
     console.log(`${key}: ${obj.Title}`); // objに、Titleなどが格納されたオブジェクトが格納されているため、obj.Titleで、タイトル文字列が取得できる
     // また、他の要素も、obj.EventIDなどで取得できる
     const listItem = document.createElement('li');
-        listItem.innerHTML = '<div class="shindo_${obj.shindo}" style="margin:10px;background-color:rgba(160,160,160,0.8);border-radius:10px;display:inline-block;padding:10px;width:360px;"><h4>'+`${key}: ${obj.Title}`+`</h3><p>発生時刻: ${obj.time_full}場所: ${obj.location}<br>深さ: ${obj.depth}マグニチュード: ${obj.magnitude}最大震度: ${obj.shindo}<br>緯度: ${obj.latitude}経度: ${obj.longitude}<br>その他: ${obj.info}</p></div>`;
+        listItem.innerHTML = `<div class="shindo_${obj.shindo}" style="margin:10px;background-color:rgba(160,160,160,0.8);border-radius:10px;display:inline-block;padding:10px;width:360px;"><h4>${key}: ${obj.Title}`+`</h3><p>発生時刻: ${obj.time_full}場所: ${obj.location}<br>深さ: ${obj.depth}マグニチュード: ${obj.magnitude}最大震度: ${obj.shindo}<br>緯度: ${obj.latitude}経度: ${obj.longitude}<br>その他: ${obj.info}</p></div>`;
         dataList.appendChild(listItem);
     }
     }
