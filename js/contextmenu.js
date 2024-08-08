@@ -31,6 +31,7 @@ function context_open(e){
 }
 function context_close(){
     document.getElementById("context_div_main").classList="fadeOut";
+    document.getElementById("context_div_main").style.display="none";
     context_isopen=false;
 }
 function context_add_child(name="",innerHTML=""){
@@ -84,9 +85,30 @@ function context_change_color_child(id,fg_color,bg_color,hover_color){
 function context_localStorage_use(bool){
     context_can_uselocalStorage=(bool?true:false);
 }
+function context_preset_apply(){
+
+}
+function context_preset_load(name){
+    var savedata= localStorage.getItem(name);
+    
+
+}
+function context_preset_convert(context){
+    context=context.replace(":;","?~ ");
+    context=context.split(";");
+    command_list=[]
+    context.forEach((element)=>command_list.push(element.replace("?~ ",";")));
+    console.log(command_list);
+    return command_list;
+}
+function context_preset_do(context,num){
+    eval(context[num]);
+}
 function context_preset_make(name,content,on_localStorage){
+    content_list=content
+    content_list.unshift(`context_${name}`);
     if(on_localStorage==1 && context_can_uselocalStorage==1){
-        localStorage.setItem(`context_${name}`,content)
+        localStorage.setItem(`context_${name}`,JSON.stringify(content_list));
     }
 }
 function context_preset_remove(name,on_localStorage){
