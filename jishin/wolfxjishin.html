@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wolfx 地震情報サンプル</title>
+</head>
+<body style="background-color: dimgrey;">
+    <!--<iframe style="position: fixed;z-index: -1;width: 100%;height: 100%;opacity: 0.9;" src="https://api.wolfx.jp/img.php" frameborder="0"></iframe>
+-->
+    <p>wolfx使用地震情報表示サンプル</p>
+    <form>
+    <input onclick="connect()" value="Connect" type="button">
+    <input onclick="ws_is_clickedbyuser=1;disconnect()" value="Disconnect" type="button">
+    </form>
+    <br>
+<!-- テキスト出力エリア -->
+    <textarea id="messageTextArea" rows="10" cols="46"></textarea>
+    <br>
+    <input id="eventType" style="width:180px">
+    <input id="dispMsg" style="width:180px">
+    <br>
+    <button onclick="jishindata()">データの再読込み</button>
+    <button onclick="MTAclear()">ログのクリア</button>
+    <p id="version">バージョン24.7.10-2234</p>
+    <div id="ui-parent"><ui id="list-container"></ui></div>
+<script>
+    function jishindata(){
+    fetch('https://api.wolfx.jp/jma_eqlist.json')
+    .then(response => response.json())
+    .then(data => {
+    listdata=Object.keys(data);
+    displayData(data);
+    });
+    };
+    function displayData(data) {
+    var dataList = document.getElementById('list-container');
+    dataList.remove();
+    var dataList=document.createElement("ui");
+    dataList.setAttribute("id","list-container");
+    const parentDiv=document.getElementById("ui-parent");
+    parentDiv.insertBefore(dataList,parentDiv.firstChild);
+    reload();
+    data=Object.entries(data)
+    for (const [key, obj] of data.filter(elem=>elem!=data[50])) {
+    console.log(`${key}: ${obj.Title}`); // objに、Titleなどが格納されたオブジェクトが格納されているため、obj.Titleで、タイトル文字列が取得できる
+    // また、他の要素も、obj.EventIDなどで取得できる
+    const listItem = document.createElement('li');
+        listItem.innerHTML = '<div class="shindo_${obj.shindo}" style="margin:10px;background-color:rgba(160,160,160,0.8);border-radius:10px;display:inline-block;padding:10px;width:360px;"><h4>'+`${key}: ${obj.Title}`+`</h3><p>発生時刻: ${obj.time_full}場所: ${obj.location}<br>深さ: ${obj.depth}マグニチュード: ${obj.magnitude}最大震度: ${obj.shindo}<br>緯度: ${obj.latitude}経度: ${obj.longitude}<br>その他: ${obj.info}</p></div>`;
+        dataList.appendChild(listItem);
+    }
+    }
+
+window.onload=function(){
+        jishindata()
+        recount=0;
+        ws_is_clickedbyuser=0;
+        mekedws=false
+    }
+    var webSocket; //ウェブソケット
+    var messageTextArea = document.getElementById("messageTextArea"); // HTML内のテキスト出力エリア
+
+    // サーバとの通信を接続する関数
+    function connect(){
+        messageTextArea.value="connecting...\n"+messageTextArea.value;
+        if(mekedws==false){
+            webSocket = new WebSocket("wss://ws-api.wolfx.jp/jma_eew"); // インスタンスを作り、サーバと接続
+            mekedws=true;
+        }else{
+            messageTextArea.value="Already connected!!!\n"+messageTextArea.value;
+        }
+        // ソケット接続すれば呼び出す関数を設定
+        webSocket.onopen = function(message){
+            messageTextArea.value= "Server connect... OK\n"+messageTextArea.value;
+            recount=0;
+        };
+      // ソケット接続が切れると呼び出す関数を設定
+        webSocket.onclose = function(message){
+            mekedws=false;
+            messageTextArea.value= "Server Disconnect... OK\n"+messageTextArea.value;
+            if (ws_is_clickedbyuser==0){
+                if(recount<30){
+                    recount+= 1;
+                };
+                messageTextArea.value="disconnect from server\nreconnecting after"+recount+"second(s)...\n"+messageTextArea.value;
+                console.log(recount);
+                date=new Date();
+                setTimeout(()=>{
+                    disconnect()
+                    connect()
+                },date.setSeconds(date.getSeconds()+recount)-new Date());
+            };ws_is_clickedbyuser=0;
+        };
+
+      // ソケット通信中でエラーが発生すれば呼び出す関数を設定
+        webSocket.onerror = function(message){
+            messageTextArea.value = "error...\n"+messageTextArea.value;
+        };
+
+      // ソケットサーバからメッセージが受信すれば呼び出す関数を設定
+        webSocket.onmessage = function(message){
+            logdate=new Date()
+            messageTextArea.value = `[${String(logdate.getHours()).padStart(2,"0")}:${String(logdate.getMinutes()).padStart(2,"0")}:${String(logdate.getSeconds()).padStart(2,"0")}]Receive => `+message.data+"\n"+messageTextArea.value;
+        };
+
+    }
+    function reload(){
+        messageTextArea.value="reloading...\n"+messageTextArea.value;
+    }
+    function MTAclear(){
+        messageTextArea.value=""
+    }
+    function logclear(){
+        console.clear()
+    }
+    // サーバとの通信を切断する関数
+    function disconnect(){
+        webSocket.close();
+    }
+</script>
+<style>li{list-style:none;}
+    .shindo_1{background-color:grey;color: black;}
+    .shindo_2{background-color:lightskyblue;color: black;}
+    .shindo_3{background-color:blue;color: white;}
+    .shindo_4{background-color:moccasin;color: black;}
+    .shindo_5-{background-color:yellow;color: black;}
+    .shindo_5+{background-color:orange;color: black;}
+    .shindo_6-{background-color:red;color: white;}
+    .shindo_6+{background-color:darkred;color: white;}
+    .shindo_7{background-color:blueviolet;color: white;}
+</style>
+</body>
+</html>
