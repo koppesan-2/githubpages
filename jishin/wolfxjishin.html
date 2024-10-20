@@ -19,12 +19,25 @@
     <input id="eventType" style="width:50%;max-width:180px;">
     <input id="dispMsg" style="width:50%;max-width:180px;">
     <br>
+    <button onclick="get_latesteew()">最新の緊急地震速報データの再読込</button>
+    <br>
     <button onclick="jishindata()">データの再読込み</button>
     <button onclick="MTAclear()">ログのクリア</button>
     <p id="version">バージョン24.1020-1738</p>
     <div class="eew_box box_color">ころっけ</div>
     <div id="ui-parent"><ui id="list-container"></ui></div>
 <script>
+window.onload=function(){
+    connectiontest()
+    jishindata()
+    recount=0;
+    ws_is_clickedbyuser=0;
+    mekedws=false
+    originaltext=[]
+    timestamp=[]
+    EEWIDs=[]
+    EEWTTL=460
+}
 function xhrconnection(xhrurl){
     var xhrs=new XMLHttpRequest();
     xhrs.open("GET",xhrurl)
@@ -44,9 +57,13 @@ function get_latesteew(){
     .then(data=>{eewdata=Object.keys(data);displayeew(data);})
 }
 function displayeew(data){
+    reload_EEW()
     data=Object.entries(data)
     for(const [key,obj]of data.filter(elem=>elem)){
         console.log(`${key}:${obj}`);
+        if (key=="OriginalText"){
+
+        }
     }
 }
 function jishindata(){
@@ -75,17 +92,6 @@ function displayData(data) {
     }
 }
 
-window.onload=function(){
-    connectiontest()
-    jishindata()
-    recount=0;
-    ws_is_clickedbyuser=0;
-    mekedws=false
-    originaltext=[]
-    timestamp=[]
-    EEWIDs=[]
-    EEWTTL=460
-}
 var webSocket; //ウェブソケット
 var messageTextArea = document.getElementById("messageTextArea"); // HTML内のテキスト出力エリア
 
@@ -135,6 +141,9 @@ var messageTextArea = document.getElementById("messageTextArea"); // HTML内の�
     }
     function reload(){
         messageTextArea.value="reloading...\n"+messageTextArea.value;
+    }
+    function reload_EEW(){
+        messageTextArea.value="latestEEWdata reloading...\n"+messageTextArea.value;
     }
     function MTAclear(){
         messageTextArea.value=""
