@@ -6,8 +6,7 @@
     <title>wolfx 地震情報サンプル</title>
 </head>
 <body style="background-color: dimgrey;">
-    <!--<iframe style="position: fixed;z-index: -1;width: 100%;height: 100%;opacity: 0.9;" src="https://api.wolfx.jp/img.php" frameborder="0"></iframe>
--->
+    <!--<iframe style="position: fixed;z-index: -1;width: 100%;height: 100%;opacity: 0.9;" src="https://api.wolfx.jp/img.php" frameborder="0"></iframe>-->
     <p>wolfx使用地震情報表示サンプル</p>
     <form>
     <input onclick="connect()" value="Connect" type="button">
@@ -22,18 +21,43 @@
     <br>
     <button onclick="jishindata()">データの再読込み</button>
     <button onclick="MTAclear()">ログのクリア</button>
-    <p id="version">バージョン24.09-0739</p>
+    <p id="version">バージョン24.1020-1738</p>
+    <div class="eew_box eew_advance">ころっけ</div>
     <div id="ui-parent"><ui id="list-container"></ui></div>
 <script>
-    function jishindata(){
+function xhrconnection(xhrurl){
+    var xhrs=new XMLHttpRequest();
+    xhrs.open("GET",xhrurl)
+    xhrs.send()
+    xhrs.onreadystatechange=function(){
+        if(xhrs.readyState==4&&xhrs.status==0){
+            return xhrurl+"OK"
+        }
+    }
+}
+function connectiontest(){
+    xhrconnection("https://api.wolfx.jp/jma_eew.json")
+}
+function get_latesteew(){
+    fetch("https://api.wolfx.jp/jma_eew.json")
+    .then(response=>response.json())
+    .then(data=>{eewdata=Object.keys(data);displayeew(data);})
+}
+function displayeew(data){
+    data=Object.entries(data)
+    for(const [key,obj]of data.filter(elem=>elem)){
+        console.log(`${key}:${obj}`);
+    }
+}
+function jishindata(){
     fetch('https://api.wolfx.jp/jma_eqlist.json')
     .then(response => response.json())
     .then(data => {
-    listdata=Object.keys(data);
-    displayData(data);
+        //listdata=Object.keys(data);
+        displayData(data);
     });
-    };
-    function displayData(data) {
+};
+function displayData(data) {
     var dataList = document.getElementById('list-container');
     dataList.remove();
     var dataList=document.createElement("ui");
@@ -43,22 +67,23 @@
     reload();
     data=Object.entries(data)
     for (const [key, obj] of data.filter(elem=>elem!=data[50])) {
-    console.log(`${key}: ${obj.Title}`); // objに、Titleなどが格納されたオブジェクトが格納されているため、obj.Titleで、タイトル文字列が取得できる
-    // また、他の要素も、obj.EventIDなどで取得できる
-    const listItem = document.createElement('li');
-        listItem.innerHTML = `<div class="shindo_${obj.shindo}" style="margin:10px;border-radius:10px;display:inline-block;padding:10px;width:360px;"><h4>${key}: ${obj.Title}`+`</h3><p>発生時刻: ${obj.time_full}場所: ${obj.location}<br>深さ: ${obj.depth}マグニチュード: ${obj.magnitude}最大震度: ${obj.shindo}<br>緯度: ${obj.latitude}経度: ${obj.longitude}<br>その他: ${obj.info}</p></div>`;
+        console.log(`${key}: ${obj.Title}`); // objに、Titleなどが格納されたオブジェクトが格納されているため、obj.Titleで、タイトル文字列が取得できる
+        // また、他の要素も、obj.EventIDなどで取得できる
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `<div class="shindo_${obj.shindo}" style="margin:10px;border-radius:10px;display:inline-block;padding:10px;width:100%;max-width:360px;"><h4>${key}: ${obj.Title}`+`</h3><p>発生時刻: ${obj.time_full}場所: ${obj.location}<br>深さ: ${obj.depth}マグニチュード: ${obj.magnitude}最大震度: ${obj.shindo}<br>緯度: ${obj.latitude}経度: ${obj.longitude}<br>その他: ${obj.info}</p></div>`;
         dataList.appendChild(listItem);
     }
-    }
+}
 
 window.onload=function(){
-        jishindata()
-        recount=0;
-        ws_is_clickedbyuser=0;
-        mekedws=false
-    }
-    var webSocket; //ウェブソケット
-    var messageTextArea = document.getElementById("messageTextArea"); // HTML内のテキスト出力エリア
+    connectiontest()
+    jishindata()
+    recount=0;
+    ws_is_clickedbyuser=0;
+    mekedws=false
+}
+var webSocket; //ウェブソケット
+var messageTextArea = document.getElementById("messageTextArea"); // HTML内のテキスト出力エリア
 
     // サーバとの通信を接続する関数
     function connect(){
@@ -129,6 +154,11 @@ window.onload=function(){
     .shindo_6+{background-color:darkred;color: white;}
     .shindo_7{background-color:blueviolet;color: white;}
     .shindo_不明{background-color:black;color: white;}
+    .eew_box{position:sticky;z-index: 999;width:100vw;height: 30vh;bottom: 0vh;left: 0vw;}
+    .eew_none{background-color:dimgrey;}
+    .eew_advance{background-color:yellow;}
+    .eew_normal{background-color:red;}
+
 </style>
 </body>
 </html>
