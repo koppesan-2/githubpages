@@ -14,10 +14,10 @@
     </form>
     <br>
 <!-- テキスト出力エリア -->
-    <textarea id="messageTextArea" rows="10" cols="46"></textarea>
+    <textarea id="messageTextArea" rows="10" cols="46" style="width:80%;max-width:360px;"></textarea>
     <br>
-    <input id="eventType" style="width:180px">
-    <input id="dispMsg" style="width:180px">
+    <input id="eventType" style="width:50%;max-width:180px;">
+    <input id="dispMsg" style="width:50%;max-width:180px;">
     <br>
     <button onclick="jishindata()">データの再読込み</button>
     <button onclick="MTAclear()">ログのクリア</button>
@@ -70,7 +70,7 @@ function displayData(data) {
         console.log(`${key}: ${obj.Title}`); // objに、Titleなどが格納されたオブジェクトが格納されているため、obj.Titleで、タイトル文字列が取得できる
         // また、他の要素も、obj.EventIDなどで取得できる
         const listItem = document.createElement('li');
-        listItem.innerHTML = `<div class="shindo_${obj.shindo}" style="margin:10px;border-radius:10px;display:inline-block;padding:10px;width:100%;max-width:360px;"><h4>${key}: ${obj.Title}`+`</h3><p>発生時刻: ${obj.time_full}場所: ${obj.location}<br>深さ: ${obj.depth}マグニチュード: ${obj.magnitude}最大震度: ${obj.shindo}<br>緯度: ${obj.latitude}経度: ${obj.longitude}<br>その他: ${obj.info}</p></div>`;
+        listItem.innerHTML = `<div class="shindo_${obj.shindo}" style="margin:5px;border-radius:10px;display:inline-block;padding:10px;width:90%;max-width:380px;"><h4>${key}: ${obj.Title}`+`</h3><p>発生時刻: ${obj.time_full}場所: ${obj.location}<br>深さ: ${obj.depth}マグニチュード: ${obj.magnitude}最大震度: ${obj.shindo}<br>緯度: ${obj.latitude}経度: ${obj.longitude}<br>その他: ${obj.info}</p></div>`;
         dataList.appendChild(listItem);
     }
 }
@@ -155,7 +155,7 @@ var messageTextArea = document.getElementById("messageTextArea"); // HTML内の�
     .shindo_7{background-color:blueviolet;color: white;}
     .shindo_不明{background-color:black;color: white;}
     .box_color{background-color:aliceblue;}
-    .eew_box{position:fixed;z-index: 999;width:100vw;height: 30vh;bottom: 0vh;left: 0vw;}
+    .eew_box{position:fixed;z-index: 999;width:100vw;height: 30vh;bottom: 0;left: 0;}
     .eew_none{background-color:dimgrey;}
     .eew_advance{background-color:yellow;}
     .eew_normal{background-color:red;}
