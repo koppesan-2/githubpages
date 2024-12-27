@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>wolfx 地震情報サンプル</title>
+    <title>wolfx 地震情報サンプルv1(old)</title>
 </head>
 <body style="background-color: dimgrey;">
     <!--<iframe style="position: fixed;z-index: -1;width: 100%;height: 100%;opacity: 0.9;" src="https://api.wolfx.jp/img.php" frameborder="0"></iframe>
 -->
-    <p>wolfx使用地震情報表示サンプル</p>
+    <p>wolfx使用地震情報表示サンプルv1(old)</p>
     <form>
     <input onclick="connect()" value="Connect" type="button">
     <input onclick="ws_is_clickedbyuser=1;disconnect()" value="Disconnect" type="button">
@@ -22,7 +22,7 @@
     <br>
     <button onclick="jishindata()">データの再読込み</button>
     <button onclick="MTAclear()">ログのクリア</button>
-    <p id="version">バージョン24.1227-1316/v1-oldOrigin</p>
+    <p id="version">バージョン24.1227-1318/v1-oldOrigin</p>
     <div id="ui-parent"><ui id="list-container"></ui></div>
 <script>
     function jishindata(){
