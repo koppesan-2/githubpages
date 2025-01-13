@@ -1,0 +1,52 @@
+
+.flcontener{
+    color:#333;
+    margin: 20px;
+    background-color: #ddd;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 6px 6px 10px 0px rgba(0, 0, 0, 0.4);
+}
+.lconnect{
+    margin-left: 0;
+    padding-left: 40px;
+    border-radius: 0 10px 10px 0;
+}
+.rconnect{
+    margin-right: 0;
+    padding-right: 40px;
+    border-radius: 10px 0 0 10px;
+}
+.bconnect{
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 40px;
+    padding-left: 40px;
+    border-radius: 0;
+}
+.tconnect{
+    margin-top: 0;
+    padding-top: 40px;
+    border-radius: 0 0 10px 10px;
+}
+.bottom_connect{
+    margin-bottom: 0;
+    padding-bottom: 40px;
+    border-radius: 10px 10px 0 0;
+}
+.btconnect{
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    border-radius: 0;
+}
+.connect{
+    margin: 0;
+    padding: 40px;
+    border-radius: 0;
+}
+.c_dark{
+    color:#ddd;
+    background-color: #333;
+}
