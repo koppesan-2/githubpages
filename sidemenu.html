@@ -6,8 +6,14 @@
     <title>Sidemenutest</title>
 </head>
 <body>
-    <label><input type="radio" name="menu">編集</label>
-    <label><input type="radio" name="menu">設定</label>
-    
+    <label><input type="radio" name="menu" id="1" class="radio">編集</label>
+    <label><input type="radio" name="menu" id="2" class="radio">設定</label>
+    <div id="a"><p>ああああ</p></div>
+    <div id="b"><p>いいいい</p></div>
+<style>
+#a{display: none;}
+#b{display: none;}
+.radio input:checked + #a{display: flex;}
+.radio input:checked + #b{display: flex;}</style>
 </body>
 </html>
