@@ -10,10 +10,69 @@
     <label><input type="radio" name="menu" id="2" class="radio">設定</label>
     <div id="a"><p>ああああ</p></div>
     <div id="b"><p>いいいい</p></div>
+
+    <label class="my-radio">
+        <input type="radio" name="example" checked>
+        <span class="radio-mark"></span>
+        りんご
+      </label>
+      
+      <label class="my-radio">
+        <input type="radio" name="example">
+        <span class="radio-mark"></span>
+        みかん
+      </label>
+      
+      <label class="my-radio">
+        <input type="radio" name="example">
+        <span class="radio-mark"></span>
+        ぶどう
+      </label>
+
 <style>
 #a{display: none;}
 #b{display: none;}
 .radio input:checked + #a{display: flex;}
-.radio input:checked + p{display: flex;}</style>
+.radio input:checked + p{display: flex;}
+
+.my-radio {
+  position: relative;
+  display: block; /* 縦並びに */
+  margin: 0.5em 0; /* 前後のスペース */
+  padding-left: 28px;
+  cursor: pointer;
+  user-select: none;
+}
+/* inputは非表示にする */
+.my-radio input {
+  display: none;
+}
+/* 常に表示する枠線の円 */
+.radio-mark {
+  position: absolute;
+  top: 0; /* 上からの位置 */
+  left: 0;
+  height: 22px; /* 大きさ */
+  width: 22px; /* 大きさ */
+  border: solid 2px #d4dae2; /* 線 */
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+/* 選択時に重ねる円 */
+.radio-mark:after {
+  content: "";
+  position: absolute;
+  background: #2e80ff; /* 色 */
+  border-radius: 50%;
+  top: 2px;
+  bottom: 2px;
+  left: 2px;
+  right: 2px;
+  opacity: 0; /* 透明にしておく */
+}
+/* 選択時に重ねた円の透明を解除 */
+.my-radio input:checked + .radio-mark:after {
+  opacity: 1;
+}</style>
 </body>
 </html>
