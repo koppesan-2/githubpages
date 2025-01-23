@@ -4,17 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>あなたへ</title>
+    <script src="../js/anatahe.js"></script>
+    <link rel="stylesheet" href="../css/anatahe.css">
 </head>
 <body>
+    <button onclick="sentaku()"><ruby>音源選択<rt>おんげんせんたく</rt></ruby></button>
     <ruby>合唱音源<rt>がっしょうおんげん</rt></ruby><audio controls src="../あなたへ合唱.m4a"></audio><br>
     <p><ruby>混声<rt>こんせい</rt></ruby>のための<ruby>合唱組曲<rt>がっしょうくみきょく</rt></ruby>「<ruby>時<rt>とき</rt></ruby>の<ruby>女神<rt>めがみ</rt></ruby>」</p>
     <h1>あなたへ　<span style="font-size: 16px;">ー<ruby>旅立<rt>たびだ</rt></ruby>ちに<ruby>寄<rt>よ</rt></ruby>せるメッセージ</span></h1>
     <h3><ruby>作詩<rt>さくし</rt></ruby>　<ruby>筒井<rt>つつい</rt></ruby>　<ruby>雅子<rt>まさこ</rt></ruby>　　<ruby>作曲<rt>さっきょく</rt></ruby>　<ruby>筒井<rt>つつい</rt></ruby>　<ruby>雅子<rt>まさこ</rt></ruby></h3>
-    <p>白木蓮にも似た　その白い翼で</p>
-<p>まだ見ぬ世界　未来という</p>
-<p>果てしない空へ　旅立ってゆくのですね</p>
-<p>まばゆいほど輝いて　旅立ってゆくのですね</p>
-<p>温かな巣をあとにして</p>
+    <p><ruby>白木蓮<rt>はくもくれん</rt></ruby>にも<ruby>似<rt>に</rt></ruby>た　その<ruby>白<rt>しろ</rt></ruby>い<ruby>翼<rt>つばさ</rt></ruby>で</p>
+<p>まだ<ruby>見<rt>み</rt></ruby>ぬ<ruby>世界<rt>せかい</rt></ruby>　<ruby>未来<rt>みらい</rt></ruby>という</p>
+<p><ruby>果<rt>は</rt></ruby>てしない<ruby>空<rt>そら</rt></ruby>へ　<ruby>旅立<rt>たびだ</rt></ruby>ってゆくのですね</p>
+<p>まばゆいほど<ruby>輝<rt>かがや</rt></ruby>いて　<ruby>旅立<rt>たびだ</rt></ruby>ってゆくのですね</p>
+<p><ruby>温<rt>あたた</rt></ruby>かな<ruby>巣<rt>す</rt></ruby>をあとにして</p>
 <p>愛と涙　そして知るだろう</p>
 <p>人生という名の迷路の果てに</p>
 <p>信じ合えることの喜びと</p>
@@ -40,11 +43,11 @@
 <p>愛と涙　あなたの手のぬくもり</p>
 <p>人生と言う名の迷路の果てに</p>
 <p>信じ合えることの喜びと　悲しみを知った分　優しくなれる</p>
+<div id="ongen"></div>
 <span>アルト音源</span><audio controls src="../あなたへアルト.m4a"></audio><br>
 <span>ソプラノ音源</span><audio controls src="../あなたへソプラノ.m4a"></audio><br>
 <span>テノール音源</span><audio controls src="../あなたへテノール.m4a"></audio><br>
 <span>伴奏音源</span><audio controls src="../あなたへ伴奏.mp3"></audio><br>
 <span>合唱音源</span><audio controls src="../あなたへ合唱.m4a"></audio><br>
-<style>p{font-size: 32px;}</style>
 </body>
 </html>
