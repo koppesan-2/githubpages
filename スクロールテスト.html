@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スクロールテスト</title>
+</head>
+<body>
+    <button onclick="goshuten()">出典へ</button>
+    <p id="wagahai">吾輩わがはいは猫である。名前はまだ無い。<br>
+　どこで生れたかとんと見当けんとうがつかぬ。<br>
+何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。<br>
+吾輩はここで始めて人間というものを見た。<br>
+しかもあとで聞くとそれは書生という人間中で一番獰悪どうあくな種族であったそうだ。<br>
+この書生というのは時々我々を捕つかまえて煮にて食うという話である。<br>
+しかしその当時は何という考もなかったから別段恐しいとも思わなかった。<br>
+ただ彼の掌てのひらに載せられてスーと持ち上げられた時何だかフワフワした感じがあったばかりである。<br>
+掌の上で少し落ちついて書生の顔を見たのがいわゆる人間というものの見始みはじめであろう。<br>
+この時妙なものだと思った感じが今でも残っている。<br>
+第一毛をもって装飾されべきはずの顔がつるつるしてまるで薬缶やかんだ。<br>
+その後ご猫にもだいぶ逢あったがこんな片輪かたわには一度も出会でくわした事がない。<br>
+のみならず顔の真中があまりに突起している。そうしてその穴の中から時々ぷうぷうと煙けむりを吹く。<br>
+どうも咽むせぽくて実に弱った。<br>
+これが人間の飲む煙草たばこというものである事はようやくこの頃知った。</p>
+<h6 id="shuten ">出典:青空文庫　<a href="https://www.aozora.gr.jp/cards/000148/files/789_14547.html">吾輩は猫である</a></h6>
+<button onclick="gowagahai()">上に戻る</button>
+<script>
+    function gowagahai(){document.getElementById("wagahai").scrollIntoView()}
+    function goshuten(){document.getElementById("shuten").scrollIntoView()}
+</script>
+</body>
+</html>
