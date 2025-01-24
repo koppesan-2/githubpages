@@ -1,1 +1,7 @@
 p{font-size: 32px;}
+#arutoue{display: var();}
+#sopuranoue{display: none;}
+#tenoruue{display: none;}
+#bansouue{display: none;}
+#ongenue{display: none;}
+#aruto{--arutovar:b}

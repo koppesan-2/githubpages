@@ -6,10 +6,19 @@
     <title>サイコロ</title>
 </head>
 <body>
-
+<span>最小</span><input id="saikoromin" type="range" min="0" max="2000"><br>
+<span>最大</span><input id="saikoromax" type="range" min="0" max="2000"><br>
+<button onclick="saikoro()">サイコロ振る</button>
 <script>
     window.onload()=function(){
+        kekka=0
+    }
+    function getRandomInt(min,max) {
+      return Math.floor((Math.random() * (max-min))+min);
+    }
 
+    function saikoro(){
+        kekka=getRandomInt(document.getElementById("saikoromin").value)
     }
 </script>
 </body>
