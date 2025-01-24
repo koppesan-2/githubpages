@@ -5,6 +5,7 @@
     --bansouvar:none;
     --ongenvar:none;
 }
+#testdiv{}
 p{font-size: 32px;}
 #arutoue{display: var(--arutovar);}
 #sopuranoue{display: var(--sopuranovar);}

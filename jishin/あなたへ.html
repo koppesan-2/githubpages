@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../css/anatahe.css">
 </head>
 <body>
-    <button onclick="sentaku()"><ruby>音源選択<rt>おんげんせんたく</rt></ruby></button>
+    <button id="sentakubutton" onclick="sentaku()"><ruby>音源選択<rt>おんげんせんたく</rt></ruby></button>
 <div id="arutoue"><span>アルト音源</span><audio controls src="../あなたへアルト.m4a"></audio><br></div>
 <div id="sopuranoue"><span>ソプラノ音源</span><audio controls src="../あなたへソプラノ.m4a"></audio><br></div>
 <div id="tenoruue"><span>テノール音源</span><audio controls src="../あなたへテノール.m4a"></audio><br></div>
@@ -49,6 +49,7 @@
 <p>人生と言う名の迷路の果てに</p>
 <p>信じ合えることの喜びと　悲しみを知った分　優しくなれる</p>
 <div id="ongen"></div>
+<button onclick="gotop()">上に戻る</button>
 <input class="ongens" type="checkbox" id="aruto"><span>アルト音源</span><audio controls src="../あなたへアルト.m4a"></audio><br>
 <input class="ongens" type="checkbox" id="sopurano"><span>ソプラノ音源</span><audio controls src="../あなたへソプラノ.m4a"></audio><br>
 <input class="ongens" type="checkbox" id="tenoru"><span>テノール音源</span><audio controls src="../あなたへテノール.m4a"></audio><br>
