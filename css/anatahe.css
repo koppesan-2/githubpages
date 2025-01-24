@@ -4,4 +4,5 @@ p{font-size: 32px;}
 #tenoruue{display: none;}
 #bansouue{display: none;}
 #ongenue{display: none;}
-#aruto{--arutovar:b}
+#aruto{--arutovar:none}
+#aruto:checked{--arutovar:block}
