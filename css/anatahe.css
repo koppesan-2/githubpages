@@ -1,3 +1,10 @@
+:root{
+    --arutovar:none;
+    --sopuranovar:none;
+    --tenoruvar:none;
+    --bansouvar:none;
+    --ongenvar:none;
+}
 p{font-size: 32px;}
 #arutoue{display: var(--arutovar);}
 #sopuranoue{display: var(--sopuranovar);}
