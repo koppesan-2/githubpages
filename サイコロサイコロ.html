@@ -8,12 +8,16 @@
 <body>
 <span>最小</span><input id="saikoromin" type="range" min="0" max="2000"><br>
 <span>最大</span><input id="saikoromax" type="range" min="0" max="2000"><br>
+<button onclick="ima()">設定値</button>
 <button onclick="saikoro()">サイコロ振る</button>
 <p>結果</p>
 <div id="kekkarireki"><div></div></div>
 <script>
     window.onload()=function(){
         kekka=0
+    }
+    function ima(){
+        alert(`${document.getElementById("saikoromin").value},${document.getElementById("saikoromax")}`)
     }
     function getRandomInt(min,max) {
       return Math.floor((Math.random() * (max-min))+min);
