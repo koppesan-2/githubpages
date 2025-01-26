@@ -157,7 +157,7 @@ li.firstli{
 
 #floatmenu{
     z-index: 2;
-    height: 150px;
+    height: 100px;
     width: 100%;
     position: fixed;
     margin: 0;
