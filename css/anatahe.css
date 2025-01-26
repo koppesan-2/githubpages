@@ -7,11 +7,6 @@
 }
 /*#testdiv{}*/
 p{font-size: 32px;}
-#arutoue{display: var(--arutovar);}
-#sopuranoue{display: var(--sopuranovar);}
-#tenoruue{display: var(--tenoruvar);}
-#bansouue{display: var(--bansouvar);}
-#ongenue{display: var(--ongenvar);}
 #aruto{--arutovar:none;}
 #aruto:checked{--arutovar:block;}
 #sopurano{--sopuranovar:none;}
@@ -22,3 +17,8 @@ p{font-size: 32px;}
 #bansou:checked{--bansouvar:block;}
 #ongen{--ongenvar:none;}
 #ongen:checked{--ongenvar:block;}
+#arutoue{display: var(--arutovar);}
+#sopuranoue{display: var(--sopuranovar);}
+#tenoruue{display: var(--tenoruvar);}
+#bansouue{display: var(--bansouvar);}
+#ongenue{display: var(--ongenvar);}
