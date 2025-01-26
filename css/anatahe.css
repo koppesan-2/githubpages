@@ -37,6 +37,8 @@ body {
 }
 label {
 	cursor: pointer;
+}
+label.menulabel{
 	position: fixed;
 }
 .open {
@@ -139,6 +141,7 @@ li.firstli{
 	background: black;
 }
 .menu div {
+    text-align: center;
 	display: block;
 	padding: 1em 2em;
 	color: white;
@@ -150,4 +153,96 @@ li.firstli{
 }
 #menuswitch:checked ~ .menu {
 	transform: none;
+}
+
+#floatmenu{
+    height: 150px;
+    width: 100%;
+    position: fixed;
+    margin: 0;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    color: white;
+    background-color: rgba(0,0,0,.9);
+}
+#floatmenu2{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+}
+.playnames{
+    font-size:32px;
+}
+
+.buttons{
+    appearance: none;
+    background-color: #2f4f4f;
+    color: #fff;
+    padding: 10px 30px;
+    text-decoration: none;
+    font-size: 1em;
+}
+#sentakubutton{
+    margin: 10px;
+    background-color: #fff;
+    border: double 6px #3cb371;
+    color: #3cb371;
+    border-radius: 10px;
+    padding: 10px 30px;
+    text-decoration: none;
+    font-size: 1em;
+}
+#sentakubutton:hover{
+        color: #3cb371;
+        background-color: #f0fff0;
+}
+#gotop{
+    margin: 10px;
+    background-color: #fff;
+    border: dashed 2px #c71585;
+    color: #c71585;
+    border-radius: 10px;
+    padding: 10px 30px;
+    text-decoration: none;
+    font-size: 1em;
+}
+#gotop:hover{
+    color: #c71585;
+    background-color: #fff0f5;
+}
+
+#scrollcheck{
+    display: none;
+}
+#scrolllabel{
+    width: 60px;
+    height: 35px;
+    background: #ccc;
+    position: relative;
+    display: inline-block;
+    border-radius: 40px;
+    transition: 0.4s;
+    box-sizing: border-box;
+}
+#scrolllabel::after{
+    content: "";
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    background: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    transition: 0.4s;
+}
+#scrollcheck:checked + #scrolllabel{
+    background-color: #4BD865;
+}
+#scrollcheck:checked + #scrolllabel::after{
+    left: 25px;
 }

@@ -10,70 +10,69 @@
 <body>
 <!--メニュー-->
 <input type="checkbox" id="menuswitch">
-<label for="menuswitch" class="open"><span></span></label>
-<label for="menuswitch" class="close"></label>
+<label for="menuswitch" class="open menulabel"><span></span></label>
+<label for="menuswitch" class="close menulabel"></label>
 <nav class="menu">
 <h2>音源</h2>
 <ul>
-    <li class="firstli"><div id="gasshoudiv"><span>合唱 </span><button id="gasshoubutton" onclick="getAudioFile('../あなたへ合唱.m4a','gasshou')">ダウンロード</button></div></li>
-    <li><div id="arutodiv"><span>アルト </span><button id="arutobutton" onclick="getAudioFile('../あなたへアルト.m4a','aruto')">ダウンロード</button></div></li>
-    <li><div id="sopuranodiv"><span>ソプラノ </span><button id="sopuranobutton" onclick="getAudioFile('../あなたへソプラノ.m4a','sopurano')">ダウンロード</button></div></li>
-    <li><div id="tenorudiv"><span>テノール </span><button id="tenorubutton" onclick="getAudioFile('../あなたへテノール.m4a','tenoru')">ダウンロード</button></div></li>
-    <li><div id="bansoudiv"><span>伴奏 </span><button id="bansoubutton" onclick="getAudioFile('../あなたへ伴奏.mp3','bansou')">ダウンロード</button></div></li>
+    <li class="firstli"><div id="gasshoudiv"><span id="gasshouspan">合唱 </span><br><button class="buttons" id="gasshoubutton" onclick="getAudioFile('../あなたへ合唱.m4a','gasshou')">ダウンロード</button></div></li>
+    <li><div id="sopuranodiv"><span id="sopuranospan">ソプラノ </span><br><button class="buttons" id="sopuranobutton" onclick="getAudioFile('../あなたへソプラノ.m4a','sopurano')">ダウンロード</button></div></li>
+    <li><div id="arutodiv"><span id="arutospan">アルト </span><br><button class="buttons" id="arutobutton" onclick="getAudioFile('../あなたへアルト.m4a','aruto')">ダウンロード</button></div></li>
+    <li><div id="tenorudiv"><span id="tenoruspan">テノール </span><br><button class="buttons" id="tenorubutton" onclick="getAudioFile('../あなたへテノール.m4a','tenoru')">ダウンロード</button></div></li>
+    <li><div id="bansoudiv"><span id="bansouspan">伴奏 </span><br><button class="buttons" id="bansoubutton" onclick="getAudioFile('../あなたへ伴奏.mp3','bansou')">ダウンロード</button></div></li>
 </ul>
 <h2>設定</h2>
 <ul>
-    <li class="firstli"><div><span>自動スクロールの有効化</span></div></li>
+    <li class="firstli"><label for="scrollcheck"><div><span>自動スクロールの有効化</span><br><input id="scrollcheck" type="checkbox" checked><label id="scrolllabel" for="scrollcheck" /></div></label></li>
 </ul>
 </nav>
+<!--フロートメニュー-->
+<div id="floatmenu"><div id="floatmenu2"><p id="anaunsu">右メニューから音源を選び、<br>設定を押してください</p></div></div>
 <!--以下メイン-->
-<div id="top"></div>
-    <button id="sentakubutton" onclick="sentaku()"><ruby>音源選択<rt>おんげんせんたく</rt></ruby></button>
-<div id="arutoue"><span>アルト音源</span><audio controls src="../あなたへアルト.m4a"></audio><br></div>
-<div id="sopuranoue"><span>ソプラノ音源</span><audio controls src="../あなたへソプラノ.m4a"></audio><br></div>
-<div id="tenoruue"><span>テノール音源</span><audio controls src="../あなたへテノール.m4a"></audio><br></div>
-<div id="bansouue"><span>伴奏音源</span><audio controls src="../あなたへ伴奏.mp3"></audio><br></div>
-<div id="ongenue"><span>合唱音源</span><audio controls src="../あなたへ合唱.m4a"></audio><br></div>
-    <ruby>合唱音源<rt>がっしょうおんげん</rt></ruby><audio controls src="../あなたへ合唱.m4a"></audio><br>
+<div id="top" ></div>
+    <button id="sentakubutton" onclick="sentaku()"><ruby>一番下<rt>いちばんした</rt></ruby>へ</button>
+    <ruby>合唱音源<rt>がっしょうおんげん</rt></ruby><span>　　右メニューから選んでダウンロードしてください</span><br>
     <p><ruby>混声<rt>こんせい</rt></ruby>のための<ruby>合唱組曲<rt>がっしょうくみきょく</rt></ruby>「<ruby>時<rt>とき</rt></ruby>の<ruby>女神<rt>めがみ</rt></ruby>」</p>
     <h1>あなたへ　<span style="font-size: 16px;">ー<ruby>旅立<rt>たびだ</rt></ruby>ちに<ruby>寄<rt>よ</rt></ruby>せるメッセージ</span></h1>
     <h3><ruby>作詩<rt>さくし</rt></ruby>　<ruby>筒井<rt>つつい</rt></ruby>　<ruby>雅子<rt>まさこ</rt></ruby>　　<ruby>作曲<rt>さっきょく</rt></ruby>　<ruby>筒井<rt>つつい</rt></ruby>　<ruby>雅子<rt>まさこ</rt></ruby></h3>
-<p><ruby>白木蓮<rt>はくもくれん</rt></ruby>にも<ruby>似<rt>に</rt></ruby>た　その<ruby>白<rt>しろ</rt></ruby>い<ruby>翼<rt>つばさ</rt></ruby>で</p>
-<p>まだ<ruby>見<rt>み</rt></ruby>ぬ<ruby>世界<rt>せかい</rt></ruby>　<ruby>未来<rt>みらい</rt></ruby>という</p>
-<p><ruby>果<rt>は</rt></ruby>てしない<ruby>空<rt>そら</rt></ruby>へ　<ruby>旅立<rt>たびだ</rt></ruby>ってゆくのですね</p>
-<p>まばゆいほど<ruby>輝<rt>かがや</rt></ruby>いて　<ruby>旅立<rt>たびだ</rt></ruby>ってゆくのですね</p>
-<p><ruby>温<rt>あたた</rt></ruby>かな<ruby>巣<rt>す</rt></ruby>をあとにして</p>
-<p><ruby>愛<rt>あい</rt></ruby>と<ruby>涙<rt>なみだ</rt></ruby>　そして<ruby>知<rt>し</rt></ruby>るだろう</p>
-<p><ruby>人生<rt>じんせい</rt></ruby>という<ruby>名<rt>な</rt></ruby>の<ruby>迷路<rt>めいろ</rt></ruby>の<ruby>果<rt>は</rt></ruby>てに</p>
-<p><ruby>信<rt>しん</rt></ruby>じ<ruby>合<rt>あ</rt></ruby>えることの<ruby>喜<rt>よろこ</rt></ruby>びと</p>
-<p><ruby>悲<rt>かな</rt></ruby>しみを<ruby>知<rt>し</rt></ruby>った<ruby>分<rt>ぶん</rt></ruby>　<ruby>優<rt>やさ</rt></ruby>しくなれることを</p>
-<p> </p>
-<p>いろんなことがあって　自分を嫌いになった</p>
-<p>なぜ僕だけがこんな目に遭うと</p>
-<p>他人を羨んだりもしたさ　荒んだ心に刺さったのは</p>
-<p>意外な奴の言葉だった　も一度　も一度</p>
-<p>あの空を飛べるかもしれないと思った</p>
-<p>張り裂けるような　悲しみの行き場</p>
-<p>煮えたぎるような　憎しみの出口</p>
-<p>時よ　おまえは見てきたのだろう</p>
-<p>憎しみの極みを　戦いの果てを</p>
-<p> </p>
-<p>時の女神よ　教えてください</p>
-<p>握り合えない手と手ならば</p>
-<p>隔てる心の壁がいつか癒され</p>
-<p>なくなる日は　くるのでしょうか</p>
-<p>手と手をつなぎ　その手をかざそう</p>
-<p>人生という名の迷路の果てに</p>
-<p>信じ合えることの喜びと　悲しみを知った分　優しくなれる</p>
-<p>愛と涙　あなたの手のぬくもり</p>
-<p>人生と言う名の迷路の果てに</p>
-<p>信じ合えることの喜びと　悲しみを知った分　優しくなれる</p>
+<p id="1"><ruby>白木蓮<rt>はくもくれん</rt></ruby>にも<ruby>似<rt>に</rt></ruby>た　その<ruby>白<rt>しろ</rt></ruby>い<ruby>翼<rt>つばさ</rt></ruby>で</p>
+<p id="2">まだ<ruby>見<rt>み</rt></ruby>ぬ<ruby>世界<rt>せかい</rt></ruby>　<ruby>未来<rt>みらい</rt></ruby>という</p>
+<p id="3"><ruby>果<rt>は</rt></ruby>てしない<ruby>空<rt>そら</rt></ruby>へ　<ruby>旅立<rt>たびだ</rt></ruby>ってゆくのですね</p>
+<p id="4">まばゆいほど<ruby>輝<rt>かがや</rt></ruby>いて　<ruby>旅立<rt>たびだ</rt></ruby>ってゆくのですね</p>
+<p id="5"><ruby>温<rt>あたた</rt></ruby>かな<ruby>巣<rt>す</rt></ruby>をあとにして</p>
+<p id="6"><ruby>愛<rt>あい</rt></ruby>と<ruby>涙<rt>なみだ</rt></ruby>　そして<ruby>知<rt>し</rt></ruby>るだろう</p>
+<p id="7"><ruby>人生<rt>じんせい</rt></ruby>という<ruby>名<rt>な</rt></ruby>の<ruby>迷路<rt>めいろ</rt></ruby>の<ruby>果<rt>は</rt></ruby>てに</p>
+<p id="8"><ruby>信<rt>しん</rt></ruby>じ<ruby>合<rt>あ</rt></ruby>えることの<ruby>喜<rt>よろこ</rt></ruby>びと</p>
+<p id="9"><ruby>悲<rt>かな</rt></ruby>しみを<ruby>知<rt>し</rt></ruby>った<ruby>分<rt>ぶん</rt></ruby>　<ruby>優<rt>やさ</rt></ruby>しくなれることを</p>
+<p id="10"> </p>
+<p id="11">いろんなことがあって　自分を嫌いになった</p>
+<p id="12">なぜ僕だけがこんな目に遭うと</p>
+<p id="13">他人を羨んだりもしたさ　荒んだ心に刺さったのは</p>
+<p id="14">意外な奴の言葉だった　も一度　も一度</p>
+<p id="15">あの空を飛べるかもしれないと思った</p>
+<p id="16">張り裂けるような　悲しみの行き場</p>
+<p id="17">煮えたぎるような　憎しみの出口</p>
+<p id="18">時よ　おまえは見てきたのだろう</p>
+<p id="19">憎しみの極みを　戦いの果てを</p>
+<p id="20"> </p>
+<p id="21">時の女神よ　教えてください</p>
+<p id="22">握り合えない手と手ならば</p>
+<p id="23">隔てる心の壁がいつか癒され</p>
+<p id="24">なくなる日は　くるのでしょうか</p>
+<p id="25">手と手をつなぎ　その手をかざそう</p>
+<p id="26">人生という名の迷路の果てに</p>
+<p id="27">信じ合えることの喜びと　悲しみを知った分　優しくなれる</p>
+<p id="28">愛と涙　あなたの手のぬくもり</p>
+<p id="29">人生と言う名の迷路の果てに</p>
+<p id="30">信じ合えることの喜びと　悲しみを知った分　優しくなれる</p>
 <div id="ongen"></div>
-<button onclick="gotop()">上に戻る</button><br>
+<button id="gotop" onclick="gotop()">上に戻る</button><br>
 <!--<input class="ongens" type="checkbox" id="aruto"><span>アルト音源</span><audio  controls src="../あなたへアルト.m4a"></audio><br>
 <input class="ongens" type="checkbox" id="sopurano"><span>ソプラノ音源</span><audio controls src="../あなたへソプラノ.m4a"></audio><br>
 <input class="ongens" type="checkbox" id="tenoru"><span>テノール音源</span><audio controls src="../あなたへテノール.m4a"></audio><br>
 <input class="ongens" type="checkbox" id="bansou"><span>伴奏音源</span><audio controls src="../あなたへ伴奏.mp3"></audio><br>
 <input checked class="ongens" type="checkbox" id="gasshou"><span>合唱音源</span><audio controls src="../あなたへ合唱.m4a"></audio><br>
---></body>
+-->
+<div style="height: 180px;width: 100%;"></div>
+</body>
 </html>

@@ -1,5 +1,5 @@
 window.addEventListener("DOMContentLoaded",function(){
-
+    var audioplay;
 })
 function sentaku(){
     document.getElementById("ongen").scrollIntoView({behavior:"smooth"})
@@ -30,7 +30,8 @@ function getAudioFile(url,id){
         let setDefaultPlay=document.createElement("button");
         setDefaultPlay.innerText="設定";
         setDefaultPlay.id=`${id}change`;
-        setDefaultPlay.setAttribute("onclick","autoclose()");
+        setDefaultPlay.setAttribute("onclick",`setDefault('${id}')`);
+        setDefaultPlay.setAttribute("class","buttons");
         document.getElementById(`${id}div`).appendChild(setDefaultPlay);
         document.getElementById(`${id}div`).appendChild(document.createElement("br"));
         document.getElementById(`${id}div`).appendChild(audioElement);
@@ -46,6 +47,50 @@ function showerror(em){
     error=em.indexOf("FetchError")!==-1?"データが取得できませんでした":em.indexOf("PredefinedID")!==-1?"このIDはすでに使用されています":"エラーが発生しました";
 
 }
+function setDefault(id){
+    let motoname=document.getElementById(`${id}span`).cloneNode(true);
+    motoname.id="playname";
+    motoname.setAttribute("class","playnames");
+    let moto=document.getElementById(id);
+    let playaudio = moto.cloneNode();
+    playaudio.id="playaudio";
+    let elm=document.getElementById("playname");
+    if(elm){elm.remove()}
+    elm=document.getElementById("playaudio");
+    if(elm){elm.remove()}
+    elm=document.getElementById("anaunsu")
+    if(elm){elm.remove()}
+    document.getElementById("floatmenu2").appendChild(motoname);
+    document.getElementById("floatmenu2").appendChild(playaudio);
+    audioplay=document.getElementById("playaudio");
+    audioplay.addEventListener("timeupdate",isscroll,false);
+    autoclose();
+}
 function autoclose(){
     document.getElementById("menuswitch").click();
+}
+function isscroll(){
+    const duration=audioplay.duration;
+    const cTime=audioplay.currentTime;
+    if(document.getElementById("scrollcheck").checked!=true){return};
+    if(cTime>220){
+        document.getElementById("30").scrollIntoView({behavior:"smooth"})
+    }else if(cTime>195){
+        document.getElementById("28").scrollIntoView({behavior:"smooth"})
+    }else if(cTime>174){
+        document.getElementById("25").scrollIntoView({behavior:"smooth"})
+    }else if(cTime>151){
+        document.getElementById("21").scrollIntoView({behavior:"smooth"})
+    }else if(cTime>128){
+        document.getElementById("16").scrollIntoView({behavior:"smooth"})
+    }else if(cTime>82){
+        document.getElementById("10").scrollIntoView({behavior:"smooth"})
+    }else if(cTime>58){
+        document.getElementById("6").scrollIntoView({behavior:"smooth"})
+    }else if(cTime>12){
+        document.getElementById("1").scrollIntoView({behavior:"smooth"})
+    }else{
+        document.getElementById("top").scrollIntoView({behavior:"smooth"})
+    }
+    //scrollBy(0,(cTime/duration)/document.documentElement.offsetHeight);
 }
