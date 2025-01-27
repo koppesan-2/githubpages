@@ -1,5 +1,8 @@
 window.addEventListener("DOMContentLoaded",function(){
     var audioplay;
+    var darkmode=document.getElementById("darkmodesetting");
+    darkmode.addEventListener("change",darkmodechange);
+
 })
 function sentaku(){
     document.getElementById("ongen").scrollIntoView({behavior:"smooth"})
@@ -8,6 +11,7 @@ function gotop(){
     document.getElementById("top").scrollIntoView({behavior:"smooth"})
 }
 function getAudioFile(url,id){
+    document.getElementById(`${id}button`).innerText="ダウンロード中...";
     fetch(url)
     .then(response => {
         if(response.ok){
@@ -95,4 +99,14 @@ function isscroll(){
         document.getElementById("top").scrollIntoView({behavior:"smooth"})
     }
     //scrollBy(0,(cTime/duration)/document.documentElement.offsetHeight);
+}
+
+function darkmodechange(){
+    if (document.getElementById("darkmodesetting").checked==true){
+        document.documentElement.style.setProperty("--frontcolor","white");
+        document.documentElement.style.setProperty("--backcolor","black");
+    }else{
+        document.documentElement.style.setProperty("--frontcolor","black");
+        document.documentElement.style.setProperty("--backcolor","white");
+    }
 }

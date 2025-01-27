@@ -4,6 +4,8 @@
     --tenoruvar:none;
     --bansouvar:none;
     --ongenvar:none;
+    --frontcolor:dark;
+    --backcolor:white;
 }
 /*#testdiv{}*/
 p{font-size: 32px;}
@@ -30,6 +32,9 @@ html {
 body {
 	overflow-x: hidden;
 	margin: 0;
+    color:var(--frontcolor);
+    background-color: var(--backcolor);
+    transition: 0.2s;
 }
 /* :::::: toggle button :::::: */
 #menuswitch {
@@ -132,7 +137,7 @@ li.firstli{
 }
 .menu a {
 	display: block;
-	padding: 1em 2em;
+	padding: 1em;
 	color: white;
 	text-decoration: inherit;
 	transition: background .6s;
@@ -143,7 +148,7 @@ li.firstli{
 .menu div {
     text-align: center;
 	display: block;
-	padding: 1em 2em;
+	padding: 1em;
 	color: white;
 	text-decoration: inherit;
 	transition: background .6s;
@@ -181,6 +186,8 @@ li.firstli{
 }
 .playnames{
     font-size:32px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .buttons{
@@ -193,8 +200,9 @@ li.firstli{
     font-size: 1em;
 }
 #sentakubutton{
+    font-weight: bold;
     margin: 10px;
-    background-color: #fff;
+    background-color: var(--backcolor);
     border: double 6px #3cb371;
     color: #3cb371;
     border-radius: 10px;
@@ -203,12 +211,14 @@ li.firstli{
     font-size: 1em;
 }
 #sentakubutton:hover{
-        color: #3cb371;
-        background-color: #f0fff0;
+    color: white;
+    background-color: #3cb371;
+    border-color:white;
 }
 #gotop{
+    font-weight: bold;
     margin: 10px;
-    background-color: #fff;
+    background-color: var(--backcolor);
     border: dashed 2px #c71585;
     color: #c71585;
     border-radius: 10px;
@@ -218,13 +228,13 @@ li.firstli{
 }
 #gotop:hover{
     color: #c71585;
-    background-color: #fff0f5;
+    background-color: #fa84ab;
 }
 
-#scrollcheck{
+.toggleswitch{
     display: none;
 }
-#scrolllabel{
+.togglelabel{
     margin: 16px;
     width: 60px;
     height: 35px;
@@ -235,7 +245,7 @@ li.firstli{
     transition: 0.4s;
     box-sizing: border-box;
 }
-#scrolllabel::after{
+.togglelabel::after{
     content: "";
     position: absolute;
     width: 35px;
@@ -248,9 +258,9 @@ li.firstli{
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     transition: 0.4s;
 }
-#scrollcheck:checked + #scrolllabel{
+.toggleswitch:checked + .togglelabel{
     background-color: #4BD865;
 }
-#scrollcheck:checked + #scrolllabel::after{
+.toggleswitch:checked + .togglelabel::after{
     left: 25px;
 }
