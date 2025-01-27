@@ -23,6 +23,7 @@ function getAudioFile(url,id){
         audioElement.id=id;
         audioElement.src=blobUrl;
         audioElement.controls=true
+        audioElement.setAttribute("class","testaudio")
         const elm=document.getElementById(id);
         if(elm){
             throw new Error(`PredefinedID:${id}`);
@@ -54,6 +55,7 @@ function setDefault(id){
     let moto=document.getElementById(id);
     let playaudio = moto.cloneNode();
     playaudio.id="playaudio";
+    playaudio.setAttribute("class","plaingaudio");
     let elm=document.getElementById("playname");
     if(elm){elm.remove()}
     elm=document.getElementById("playaudio");
