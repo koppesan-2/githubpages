@@ -2,7 +2,7 @@ window.addEventListener("DOMContentLoaded",function(){
     var audioplay;
     var darkmode=document.getElementById("darkmodesetting");
     darkmode.addEventListener("change",darkmodechange);
-
+    
 })
 function sentaku(){
     document.getElementById("ongen").scrollIntoView({behavior:"smooth"})
