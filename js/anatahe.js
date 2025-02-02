@@ -2,7 +2,6 @@ window.addEventListener("DOMContentLoaded",function(){
     var audioplay;
     var darkmode=document.getElementById("darkmodesetting");
     darkmode.addEventListener("change",darkmodechange);
-
 })
 function sentaku(){
     document.getElementById("ongen").scrollIntoView({behavior:"smooth"})
@@ -108,5 +107,16 @@ function darkmodechange(){
     }else{
         document.documentElement.style.setProperty("--frontcolor","black");
         document.documentElement.style.setProperty("--backcolor","white");
+    }
+}
+
+function eazyuichange(){
+    eazyui=document.getElementById("eazyuisetting")
+    if(eazyui.checked==true){
+        document.getElementById("top").style.display="none";
+        document.getElementById("gotop").style.display="none";
+    }else{
+        document.getElementById("top").style.display="block";
+        document.getElementById("gotop").style.display="block";
     }
 }
