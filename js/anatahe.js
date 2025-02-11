@@ -1,11 +1,13 @@
 init()
 function init(){
     cookiemaxages=7776000
+    if(document.cookie.indexOf("confirmed")!==-1){
     cookies=getCookieArray()
+    if(cookies["settingsave"]=="true"){
     if(cookies["darkmode"]=="true"){
         cssvar("--frontcolor","white");
         cssvar("--backcolor","black");
-    }
+    }}}
 }
 window.addEventListener("DOMContentLoaded",function(){
     var audioplay;
@@ -16,8 +18,8 @@ window.addEventListener("DOMContentLoaded",function(){
 function loadsettings(){
     cookies=getCookieArray()
     if(cookies["confirmed"]=="true"){cookieconfirmchange()};
+    if(cookies["settingsave"]=="true"){document.getElementById("settingsave").checked=true;}else{return};
     if(cookies["darkmode"]=="true"){document.getElementById("darkmodesetting").checked=true;};
-    if(cookies["settingsave"]=="true"){document.getElementById("settingsave").checked=true;};
     if(cookies["scroll"]=="false"){document.getElementById("scrollcheck").checked=false;};
     if(cookies["eazyui"]=="true"){document.getElementById("eazyuisetting").checked=true;};
 }
@@ -171,6 +173,9 @@ function settingsaveon(){
     cookieconfirmchange()
     document.getElementById("settingsave").checked=true;
     settingsave("settingsave",true,cookiemaxages);
+    settingsave("darkmode",document.getElementById("darkmodesetting").checked,cookiemaxages);
+    settingsave("scroll",document.getElementById("scrollcheck").checked,cookiemaxages);
+    settingsave("eazyui",document.getElementById("eazyuisetting").checked,cookiemaxages);
 }
 function settingsavecancel(){
     document.getElementById("settingsave").checked=false;
