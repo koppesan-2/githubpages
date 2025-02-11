@@ -147,7 +147,6 @@ function darkmodechange(){
         cssvar("--backcolor","white");
     }
 }
-
 function deletecookie(){
     if (window.confirm("注意⚠cookieがすべて削除されます")){
         settingsave("settingsave");
@@ -192,5 +191,13 @@ function settingsavechange(){
     }else{
         settingsave("settingsave",false,0);
     }
-
+function eazyuichange(){
+    eazyui=document.getElementById("eazyuisetting")
+    if(eazyui.checked==true){
+        document.getElementById("top").style.display="none";
+        document.getElementById("gotop").style.display="none";
+    }else{
+        document.getElementById("top").style.display="block";
+        document.getElementById("gotop").style.display="block";
+    }
 }
