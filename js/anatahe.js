@@ -1,8 +1,41 @@
+init()
+function init(){
+    cookiemaxages=7776000
+    cookies=getCookieArray()
+    if(cookies["darkmode"]=="true"){
+        cssvar("--frontcolor","white");
+        cssvar("--backcolor","black");
+    }
+}
 window.addEventListener("DOMContentLoaded",function(){
     var audioplay;
     var darkmode=document.getElementById("darkmodesetting");
     darkmode.addEventListener("change",darkmodechange);
+    loadsettings();
 })
+function loadsettings(){
+    cookies=getCookieArray()
+    if(cookies["confirmed"]=="true"){cookieconfirmchange()};
+    if(cookies["darkmode"]=="true"){document.getElementById("darkmodesetting").checked=true;};
+    if(cookies["settingsave"]=="true"){document.getElementById("settingsave").checked=true;};
+    if(cookies["scroll"]=="false"){document.getElementById("scrollcheck").checked=false;};
+
+}
+function getCookieArray(){
+    var arr = new Array();
+    if(document.cookie != ''){
+        var tmp = document.cookie.split('; ');
+        for(var i=0;i<tmp.length;i++){
+            var data = tmp[i].split('=');
+            arr[data[0]] = decodeURIComponent(data[1]);
+        }
+    }
+    return arr;
+}
+function cssvar(cssid,value){
+    document.documentElement.style.setProperty(cssid,value);
+}
+
 function sentaku(){
     document.getElementById("ongen").scrollIntoView({behavior:"smooth"})
 }
@@ -43,12 +76,12 @@ function getAudioFile(url,id){
     }
     })
     .catch(e => {
-      console.log(e.message);
+        console.log(e.message);
         showerror(e.message);
     })
 }
 function showerror(em){
-    error=em.indexOf("FetchError")!==-1?"データが取得できませんでした":em.indexOf("PredefinedID")!==-1?"このIDはすでに使用されています":"エラーが発生しました";
+    error=em.indexOf("FetchError")!==-1?"データが取得できませんでした":em.indexOf("PredefinedID")!==-1?"このIDはすでに使用されています":em.indexOf("CookiesAreNotAllowed")!==-1?"cookieの使用が許可されていません":"不明なエラーが発生しました";
 
 }
 function setDefault(id){
@@ -73,6 +106,9 @@ function setDefault(id){
 }
 function autoclose(){
     document.getElementById("menuswitch").click();
+}
+function scrollchange(){
+    document.getElementById("scrollcheck").checked==true?settingsave("scroll",true,cookiemaxages):settingsave("scroll",false,cookiemaxages);
 }
 function isscroll(){
     const duration=audioplay.duration;
@@ -102,14 +138,59 @@ function isscroll(){
 
 function darkmodechange(){
     if (document.getElementById("darkmodesetting").checked==true){
-        document.documentElement.style.setProperty("--frontcolor","white");
-        document.documentElement.style.setProperty("--backcolor","black");
+        settingsave("darkmode","true",cookiemaxages);
+        cssvar("--frontcolor","white");
+        cssvar("--backcolor","black");
     }else{
-        document.documentElement.style.setProperty("--frontcolor","black");
-        document.documentElement.style.setProperty("--backcolor","white");
+        settingsave("darkmode","false",cookiemaxages);
+        cssvar("--frontcolor","black");
+        cssvar("--backcolor","white");
     }
 }
-
+function deletecookie(){
+    if (window.confirm("注意⚠cookieがすべて削除されます")){
+        settingsave("settingsave");
+        settingsave("darkmode");
+        settingsave("scroll");
+        settingsave("confirmed");
+        document.getElementById("settingsave").checked=false;
+        document.getElementById("cookiesetting").checked=false;
+    }else{
+        window.alert("キャンセルしました")
+    };}
+function settingsave(cookieid,cookievalue=false,maxage=0){
+    cookies=getCookieArray()
+    if(cookies["confirmed"]=="true"){
+        document.cookie=`${cookieid}=${cookievalue};max-age=${maxage}`
+    }else if(document.cookie.indexOf("confirmed")!==-1){
+        showerror("CookiesAreNotAllowed")
+    }
+}
+function settingsaveon(){
+    cookieconfirmchange()
+    document.getElementById("settingsave").checked=true;
+    settingsave("settingsave",true,cookiemaxages);
+}
+function settingsavecancel(){
+    document.getElementById("settingsave").checked=false;
+    window.alert("キャンセルしました");
+}
+function cookieconfirmchange(){
+    document.cookie=`confirmed=true;max-age=${cookiemaxages}`
+    document.getElementById("cookiesetting").checked=true;
+}
+function settingsavechange(){
+    if(document.getElementById("settingsave").checked==true){
+        if(document.cookie.indexOf("confirmed")==-1){
+            if(window.confirm("注意⚠この機能は実験的に実装されています。\n表示がおかしくなった場合は、この設定をオフにしてください\nこの機能ではブラウザのcookieを使用します。(これを有効化するとcookieの使用に同意します)\n有効期限＝約３ヶ月")===false){
+                settingsavecancel();
+                return
+            }
+        }
+        settingsaveon();
+    }else{
+        settingsave("settingsave",false,0);
+    }
 function eazyuichange(){
     eazyui=document.getElementById("eazyuisetting")
     if(eazyui.checked==true){

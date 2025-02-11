@@ -261,6 +261,20 @@ li.firstli{
 .toggleswitch:checked + .togglelabel{
     background-color: #4BD865;
 }
+.toggleswitch:checked:disabled+.togglelabel{
+    background-color: #24642f;
+}
+.toggleswitch:disabled+.togglelabel{
+    background-color: #222;
+}
 .toggleswitch:checked + .togglelabel::after{
     left: 25px;
+}
+.toggleswitch:disabled+.togglelabel::after{
+    background-color: #777;
+}
+#deletecookie{
+    appearance: none;
+    background-color: black;
+    color: red;
 }
