@@ -188,7 +188,7 @@ function cookieconfirmchange(){
 function settingsavechange(){
     if(document.getElementById("settingsave").checked==true){
         if(document.cookie.indexOf("confirmed")==-1){
-            if(window.confirm("注意⚠この機能は実験的に実装されています。\n表示がおかしくなった場合は、この設定をオフにしてください\nこの機能ではブラウザのcookieを使用します。(これを有効化するとcookieの使用に同意します)\n有効期限＝約３ヶ月")===false){
+            if(window.confirm("ページを再読込しても設定が再読込前のまま残るようになります\n注意⚠この機能は実験的に実装されています。\n表示がおかしくなった場合は、この設定をオフにしてください\nこの機能ではブラウザのcookieを使用します。\n(これを有効化するとcookieの使用に同意します)\n有効期限＝約３ヶ月")===false){
                 settingsavecancel();
                 return
             }
