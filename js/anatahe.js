@@ -1,10 +1,25 @@
 init()
 function init(){
+    cookiemaxages=7776000
     cookies=getCookieArray()
     if(cookies["darkmode"]=="true"){
         cssvar("--frontcolor","white");
         cssvar("--backcolor","black");
     }
+}
+window.addEventListener("DOMContentLoaded",function(){
+    var audioplay;
+    var darkmode=document.getElementById("darkmodesetting");
+    darkmode.addEventListener("change",darkmodechange);
+    loadsettings();
+})
+function loadsettings(){
+    cookies=getCookieArray()
+    if(cookies["confirmed"]=="true"){cookieconfirmchange()};
+    if(cookies["darkmode"]=="true"){document.getElementById("darkmodesetting").checked=true;};
+    if(cookies["settingsave"]=="true"){document.getElementById("settingsave").checked=true;};
+    if(cookies["scroll"]=="false"){document.getElementById("scrollcheck").checked=false;};
+
 }
 function getCookieArray(){
     var arr = new Array();
@@ -17,17 +32,10 @@ function getCookieArray(){
     }
     return arr;
 }
-
 function cssvar(cssid,value){
     document.documentElement.style.setProperty(cssid,value);
 }
 
-window.addEventListener("DOMContentLoaded",function(){
-    var audioplay;
-    var darkmode=document.getElementById("darkmodesetting");
-    darkmode.addEventListener("change",darkmodechange);
-    document.getElementById("darkmodesetting").checked=true;
-})
 function sentaku(){
     document.getElementById("ongen").scrollIntoView({behavior:"smooth"})
 }
@@ -99,6 +107,9 @@ function setDefault(id){
 function autoclose(){
     document.getElementById("menuswitch").click();
 }
+function scrollchange(){
+    document.getElementById("scrollcheck").checked==true?settingsave("scroll",true,cookiemaxages):settingsave("scroll",false,cookiemaxages);
+}
 function isscroll(){
     const duration=audioplay.duration;
     const cTime=audioplay.currentTime;
@@ -127,11 +138,11 @@ function isscroll(){
 
 function darkmodechange(){
     if (document.getElementById("darkmodesetting").checked==true){
-        settingsave("darkmode","true",180);
+        settingsave("darkmode","true",cookiemaxages);
         cssvar("--frontcolor","white");
         cssvar("--backcolor","black");
     }else{
-        settingsave("darkmode","false",180);
+        settingsave("darkmode","false",cookiemaxages);
         cssvar("--frontcolor","black");
         cssvar("--backcolor","white");
     }
@@ -139,18 +150,16 @@ function darkmodechange(){
 
 function deletecookie(){
     if (window.confirm("注意⚠cookieがすべて削除されます")){
-        document.cookie="confirmed='true';max-age=0";
+        settingsave("settingsave");
+        settingsave("darkmode");
+        settingsave("scroll");
+        settingsave("confirmed");
         document.getElementById("settingsave").checked=false;
         document.getElementById("cookiesetting").checked=false;
     }else{
         window.alert("キャンセルしました")
     };}
-function cookieconfirm(){
-    document.cookie="confirmed=true;max-age=180"
-    document.getElementById("cookiesetting").checked=true;
-
-}
-function settingsave(cookieid,cookievalue,maxage=0){
+function settingsave(cookieid,cookievalue=false,maxage=0){
     cookies=getCookieArray()
     if(cookies["confirmed"]=="true"){
         document.cookie=`${cookieid}=${cookievalue};max-age=${maxage}`
@@ -158,15 +167,30 @@ function settingsave(cookieid,cookievalue,maxage=0){
         showerror("CookiesAreNotAllowed")
     }
 }
+function settingsaveon(){
+    cookieconfirmchange()
+    document.getElementById("settingsave").checked=true;
+    settingsave("settingsave",true,cookiemaxages);
+}
 function settingsavecancel(){
     document.getElementById("settingsave").checked=false;
     window.alert("キャンセルしました");
 }
+function cookieconfirmchange(){
+    document.cookie=`confirmed=true;max-age=${cookiemaxages}`
+    document.getElementById("cookiesetting").checked=true;
+}
 function settingsavechange(){
     if(document.getElementById("settingsave").checked==true){
         if(document.cookie.indexOf("confirmed")==-1){
-            window.confirm("注意⚠この機能は実験的に実装されています。\n表示がおかしくなった場合は、この設定をオフにしてください\nこの機能ではブラウザのcookieを使用します。(これを有効化するとcookieの使用に同意します)\n有効期限＝約３ヶ月")?cookieconfirm():settingsavecancel();
+            if(window.confirm("注意⚠この機能は実験的に実装されています。\n表示がおかしくなった場合は、この設定をオフにしてください\nこの機能ではブラウザのcookieを使用します。(これを有効化するとcookieの使用に同意します)\n有効期限＝約３ヶ月")===false){
+                settingsavecancel();
+                return
+            }
         }
+        settingsaveon();
+    }else{
+        settingsave("settingsave",false,0);
     }
 
 }
