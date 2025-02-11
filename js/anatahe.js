@@ -1,8 +1,32 @@
+init()
+function init(){
+    cookies=getCookieArray()
+    if(cookies["darkmode"]=="true"){
+        cssvar("--frontcolor","white");
+        cssvar("--backcolor","black");
+    }
+}
+function getCookieArray(){
+    var arr = new Array();
+    if(document.cookie != ''){
+        var tmp = document.cookie.split('; ');
+        for(var i=0;i<tmp.length;i++){
+            var data = tmp[i].split('=');
+            arr[data[0]] = decodeURIComponent(data[1]);
+        }
+    }
+    return arr;
+}
+
+function cssvar(cssid,value){
+    document.documentElement.style.setProperty(cssid,value);
+}
+
 window.addEventListener("DOMContentLoaded",function(){
     var audioplay;
     var darkmode=document.getElementById("darkmodesetting");
     darkmode.addEventListener("change",darkmodechange);
-    
+    document.getElementById("darkmodesetting").checked=true;
 })
 function sentaku(){
     document.getElementById("ongen").scrollIntoView({behavior:"smooth"})
@@ -44,12 +68,12 @@ function getAudioFile(url,id){
     }
     })
     .catch(e => {
-      console.log(e.message);
+        console.log(e.message);
         showerror(e.message);
     })
 }
 function showerror(em){
-    error=em.indexOf("FetchError")!==-1?"データが取得できませんでした":em.indexOf("PredefinedID")!==-1?"このIDはすでに使用されています":"エラーが発生しました";
+    error=em.indexOf("FetchError")!==-1?"データが取得できませんでした":em.indexOf("PredefinedID")!==-1?"このIDはすでに使用されています":em.indexOf("CookiesAreNotAllowed")!==-1?"cookieの使用が許可されていません":"不明なエラーが発生しました";
 
 }
 function setDefault(id){
@@ -103,10 +127,46 @@ function isscroll(){
 
 function darkmodechange(){
     if (document.getElementById("darkmodesetting").checked==true){
-        document.documentElement.style.setProperty("--frontcolor","white");
-        document.documentElement.style.setProperty("--backcolor","black");
+        settingsave("darkmode","true",180);
+        cssvar("--frontcolor","white");
+        cssvar("--backcolor","black");
     }else{
-        document.documentElement.style.setProperty("--frontcolor","black");
-        document.documentElement.style.setProperty("--backcolor","white");
+        settingsave("darkmode","false",180);
+        cssvar("--frontcolor","black");
+        cssvar("--backcolor","white");
     }
+}
+
+function deletecookie(){
+    if (window.confirm("注意⚠cookieがすべて削除されます")){
+        document.cookie="confirmed='true';max-age=0";
+        document.getElementById("settingsave").checked=false;
+        document.getElementById("cookiesetting").checked=false;
+    }else{
+        window.alert("キャンセルしました")
+    };}
+function cookieconfirm(){
+    document.cookie="confirmed=true;max-age=180"
+    document.getElementById("cookiesetting").checked=true;
+
+}
+function settingsave(cookieid,cookievalue,maxage=0){
+    cookies=getCookieArray()
+    if(cookies["confirmed"]=="true"){
+        document.cookie=`${cookieid}=${cookievalue};max-age=${maxage}`
+    }else if(document.cookie.indexOf("confirmed")!==-1){
+        showerror("CookiesAreNotAllowed")
+    }
+}
+function settingsavecancel(){
+    document.getElementById("settingsave").checked=false;
+    window.alert("キャンセルしました");
+}
+function settingsavechange(){
+    if(document.getElementById("settingsave").checked==true){
+        if(document.cookie.indexOf("confirmed")==-1){
+            window.confirm("注意⚠この機能は実験的に実装されています。\n表示がおかしくなった場合は、この設定をオフにしてください\nこの機能ではブラウザのcookieを使用します。(これを有効化するとcookieの使用に同意します)\n有効期限＝約３ヶ月")?cookieconfirm():settingsavecancel();
+        }
+    }
+
 }
