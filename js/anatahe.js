@@ -19,7 +19,7 @@ function loadsettings(){
     if(cookies["darkmode"]=="true"){document.getElementById("darkmodesetting").checked=true;};
     if(cookies["settingsave"]=="true"){document.getElementById("settingsave").checked=true;};
     if(cookies["scroll"]=="false"){document.getElementById("scrollcheck").checked=false;};
-
+    if(cookies["eazyui"]=="true"){document.getElementById("eazyuisetting").checked=true;};
 }
 function getCookieArray(){
     var arr = new Array();
@@ -153,6 +153,7 @@ function deletecookie(){
         settingsave("darkmode");
         settingsave("scroll");
         settingsave("confirmed");
+        settingsave("eazyui");
         document.getElementById("settingsave").checked=false;
         document.getElementById("cookiesetting").checked=false;
     }else{
@@ -195,9 +196,11 @@ function settingsavechange(){
 function eazyuichange(){
     eazyui=document.getElementById("eazyuisetting")
     if(eazyui.checked==true){
+        settingsave("eazyui",true,cookiemaxages)
         document.getElementById("top").style.display="none";
         document.getElementById("gotop").style.display="none";
     }else{
+        settingsave("eazyui",false,cookiemaxages)
         document.getElementById("top").style.display="block";
         document.getElementById("gotop").style.display="block";
     }
