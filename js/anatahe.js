@@ -191,6 +191,7 @@ function settingsavechange(){
     }else{
         settingsave("settingsave",false,0);
     }
+}
 function eazyuichange(){
     eazyui=document.getElementById("eazyuisetting")
     if(eazyui.checked==true){
