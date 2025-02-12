@@ -21,7 +21,7 @@ function loadsettings(){
     if(cookies["settingsave"]=="true"){document.getElementById("settingsave").checked=true;}else{return};
     if(cookies["darkmode"]=="true"){document.getElementById("darkmodesetting").checked=true;};
     if(cookies["scroll"]=="false"){document.getElementById("scrollcheck").checked=false;};
-    if(cookies["eazyui"]=="true"){document.getElementById("eazyuisetting").checked=true;};
+    if(cookies["eazyui"]=="true"){document.getElementById("eazyuisetting").checked=true;eazyuichange();};
 }
 function getCookieArray(){
     var arr = new Array();
