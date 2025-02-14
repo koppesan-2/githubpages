@@ -93,7 +93,7 @@ function setDefault(id){
     let moto=document.getElementById(id);
     let playaudio = moto.cloneNode();
     playaudio.id="playaudio";
-    playaudio.setAttribute("class","plaingaudio");
+    playaudio.setAttribute("class",`playingaudio plays${id}`);
     let elm=document.getElementById("playname");
     if(elm){elm.remove()}
     elm=document.getElementById("playaudio");
