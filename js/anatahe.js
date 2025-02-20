@@ -1,4 +1,8 @@
-init()
+init();
+//redtime=[12.88,24.92,30.77,42.76,54.23,59.51,65.30,70.97,76.75,82.47,94.44,100.36,112.45,128.91,134.78,140.56,146.37,152.02,157.05,163.38,170.40,174.59,180.40,186.08,196.73,201.84,208.14];//,218.75,232.08,235.57];
+redtime=[12,24,30,42,53,58,64.5,70.2,76.2,81.8,93.8,99.7,111.8,119,128,134,140,145.2,151,157,162.5,169.6,174,180,185.5,195.5,201,206.8,219];
+lyrics=30
+latestredcolor=-1
 function init(){
     cookiemaxages=7776000
     if(document.cookie.indexOf("confirmed")!==-1){
@@ -22,6 +26,7 @@ function loadsettings(){
     if(cookies["darkmode"]=="true"){document.getElementById("darkmodesetting").checked=true;};
     if(cookies["scroll"]=="false"){document.getElementById("scrollcheck").checked=false;};
     if(cookies["eazyui"]=="true"){document.getElementById("eazyuisetting").checked=true;eazyuichange();};
+    if(cookies["redshow"]=="true"){document.getElementById("redshow").checked=true;};
 }
 function getCookieArray(){
     var arr = new Array();
@@ -37,12 +42,14 @@ function getCookieArray(){
 function cssvar(cssid,value){
     document.documentElement.style.setProperty(cssid,value);
 }
-
+function scroll(to,scbehavior="smooth"){
+    document.getElementById(to).scrollIntoView({behavior:scbehavior});
+}
 function sentaku(){
-    document.getElementById("ongen").scrollIntoView({behavior:"smooth"})
+    scroll("ongen");
 }
 function gotop(){
-    document.getElementById("top").scrollIntoView({behavior:"smooth"})
+    scroll("top");
 }
 function getAudioFile(url,id){
     document.getElementById(`${id}button`).innerText="ダウンロード中...";
@@ -109,35 +116,64 @@ function setDefault(id){
 function autoclose(){
     document.getElementById("menuswitch").click();
 }
+function redshow(){
+    document.getElementById("redshow").checked==true?settingsave("redshow",true,cookiemaxages):settingsave("redshow",false,cookiemaxages);
+    removeallreds();
+}
 function scrollchange(){
     document.getElementById("scrollcheck").checked==true?settingsave("scroll",true,cookiemaxages):settingsave("scroll",false,cookiemaxages);
 }
 function isscroll(){
     const duration=audioplay.duration;
     const cTime=audioplay.currentTime;
+    if(document.getElementById("redshow").checked){redshowmove(cTime)};
     if(document.getElementById("scrollcheck").checked!=true){return};
     if(cTime>220){
-        document.getElementById("30").scrollIntoView({behavior:"smooth"})
+        document.getElementById("27").scrollIntoView({behavior:"smooth"})
     }else if(cTime>195){
-        document.getElementById("28").scrollIntoView({behavior:"smooth"})
-    }else if(cTime>174){
         document.getElementById("25").scrollIntoView({behavior:"smooth"})
+    }else if(cTime>174){
+        document.getElementById("22").scrollIntoView({behavior:"smooth"})
     }else if(cTime>151){
-        document.getElementById("21").scrollIntoView({behavior:"smooth"})
+        document.getElementById("18").scrollIntoView({behavior:"smooth"})
     }else if(cTime>128){
-        document.getElementById("16").scrollIntoView({behavior:"smooth"})
+        document.getElementById("14").scrollIntoView({behavior:"smooth"})
     }else if(cTime>82){
-        document.getElementById("10").scrollIntoView({behavior:"smooth"})
+        document.getElementById("9").scrollIntoView({behavior:"smooth"})
     }else if(cTime>58){
-        document.getElementById("6").scrollIntoView({behavior:"smooth"})
+        document.getElementById("5").scrollIntoView({behavior:"smooth"})
     }else if(cTime>12){
-        document.getElementById("1").scrollIntoView({behavior:"smooth"})
+        document.getElementById("0").scrollIntoView({behavior:"smooth"})
     }else{
         document.getElementById("top").scrollIntoView({behavior:"smooth"})
     }
     //scrollBy(0,(cTime/duration)/document.documentElement.offsetHeight);
 }
-
+function removeallreds(){
+    for(i=0;i<redtime.length;i++){
+        document.getElementById(i).style.backgroundColor="";
+    }
+}
+function redshowmove(time){
+    for(i=redtime.length-1;redtime[i]>time;i--){};
+    if((i==-1)||(latestredcolor==i)){return;};
+    if(latestredcolor!=-1){document.getElementById(latestredcolor).style.backgroundColor="";};
+    document.getElementById(i).style.backgroundColor="red"
+    latestredcolor=i
+}
+/*function redshowmove(time){
+    colored=0
+    for(var i=redtime.length;i!=-1;i--){
+        if(colored==1){
+            document.getElementById(i).style.backgroundColor="";
+        }else if(redtime[i]<time){
+            document.getElementById(i).style.backgroundColor="red";
+            colored=1;
+        }else{
+            document.getElementById(i).style.backgroundColor="";
+        }
+    }
+}*/
 function darkmodechange(){
     if (document.getElementById("darkmodesetting").checked==true){
         settingsave("darkmode","true",cookiemaxages);

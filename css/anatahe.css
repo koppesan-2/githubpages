@@ -8,7 +8,9 @@
     --backcolor:white;
 }
 /*#testdiv{}*/
-p{font-size: 32px;}
+p{font-size: 32px;margin-left: 16px;width: fit-content;}
+h1{font-size: 40px;margin-left: 16px;}
+h3{font-size: 24px;margin-left: 16px;}
 #aruto{--arutovar:none;}
 #aruto:checked{--arutovar:block;}
 #sopurano{--sopuranovar:none;}
