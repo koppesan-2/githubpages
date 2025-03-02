@@ -1,8 +1,12 @@
 init();
 //redtime=[12.88,24.92,30.77,42.76,54.23,59.51,65.30,70.97,76.75,82.47,94.44,100.36,112.45,128.91,134.78,140.56,146.37,152.02,157.05,163.38,170.40,174.59,180.40,186.08,196.73,201.84,208.14];//,218.75,232.08,235.57];
 redtime=[12,24,30,42,53,58,64.5,70.2,76.2,81.8,93.8,99.7,111.8,119,128,134,140,145.2,151,157,162.5,169.6,174,180,185.5,195.5,201,206.8,219];
+redtime2=[12,23,29,40.5,52,58,63.5,70.2,76.2,81.8,93.8,99.7,111.8,119,128,134,140,145.2,151,157,162.5,169.6,174,180,185.5,195.5,201,206.8,219];
 lyrics=30
 latestredcolor=-1
+audiocontext=new AudioContext();
+track=new AudioContext();
+audioplaygainnode=audiocontext.createGain();
 function init(){
     cookiemaxages=7776000
     if(document.cookie.indexOf("confirmed")!==-1){
@@ -107,11 +111,44 @@ function setDefault(id){
     if(elm){elm.remove()}
     elm=document.getElementById("anaunsu")
     if(elm){elm.remove()}
+    elm=document.getElementById("volumebutton")
+    if(elm){elm.remove()}
+    elm=document.getElementById("volumespan")
+    if(elm){elm.remove()}
     document.getElementById("floatmenu2").appendChild(motoname);
     document.getElementById("floatmenu2").appendChild(playaudio);
     audioplay=document.getElementById("playaudio");
-    audioplay.addEventListener("timeupdate",isscroll,false);
+    audioplay.addEventListener("timeupdate",isscroll(),false);
+    audiocontext=new AudioContext();
+    audioplaygainnode=audiocontext.createGain();
+    track=audiocontext.createMediaElementSource(audioplay);
+    track.connect(audioplaygainnode).connect(audiocontext.destination);
+    volumeboostbuttonset();
     autoclose();
+}
+function volumeboostbuttonset(){
+    volumebutton=document.createElement("input");
+    volumebutton.type="range"
+    volumebutton.id="volumebutton"
+    volumebutton.setAttribute("oninput","volumeboost()")
+    volumebutton.setAttribute("max","6");
+    volumebutton.setAttribute("min","0");
+    volumebutton.setAttribute("value","1");
+    volumebutton.setAttribute("step","0.01");
+    document.getElementById("floatmenu2").appendChild(volumebutton)
+    volumespan=document.createElement("span");
+    volumespan.id="volumespan"
+    volumespan.innerText="🔉100%"
+    document.getElementById("floatmenu2").appendChild(volumespan)
+}
+function volumeboost(){
+    volumelevel=document.getElementById("volumebutton").value
+    volumeleveltext=Math.round(volumelevel*100)
+    volumecontrol(audioplaygainnode,volumelevel)
+    document.getElementById("volumespan").innerText=`${volumeleveltext==0?"🔇"+volumeleveltext:volumeleveltext<100?"🔈"+volumeleveltext:volumeleveltext<200?"🔉"+volumeleveltext:volumeleveltext<300?"🔊"+volumeleveltext:volumeleveltext<400?"⚠"+volumeleveltext:"⚠警告⚠"+volumeleveltext}%`
+}
+function volumecontrol(id,level){
+    id.gain.value=level
 }
 function autoclose(){
     document.getElementById("menuswitch").click();
@@ -154,8 +191,8 @@ function removeallreds(){
         document.getElementById(i).style.backgroundColor="";
     }
 }
-function redshowmove(time){
-    for(i=redtime.length-1;redtime[i]>time;i--){};
+function redshowmove(time,type=redtime){
+    for(i=type.length-1;type[i]>time;i--){};
     if((i==-1)||(latestredcolor==i)){return;};
     if(latestredcolor!=-1){document.getElementById(latestredcolor).style.backgroundColor="";};
     document.getElementById(i).style.backgroundColor="red"

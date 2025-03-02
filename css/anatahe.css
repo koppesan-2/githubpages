@@ -280,3 +280,7 @@ li.firstli{
     background-color: black;
     color: red;
 }
+
+#volumebutton{
+    width: 200px;
+}
