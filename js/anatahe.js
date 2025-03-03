@@ -19,6 +19,7 @@ function init(){
 
 }
 window.addEventListener("DOMContentLoaded",function(){
+    gotop("auto");
     var audioplay;
     var darkmode=document.getElementById("darkmodesetting");
     darkmode.addEventListener("change",darkmodechange);
@@ -58,8 +59,8 @@ function scroll(to,scbehavior="smooth"){
 function sentaku(){
     scroll("ongen");
 }
-function gotop(){
-    scroll("top");
+function gotop(how=undefined){
+    scroll("top",how);
 }
 function getAudioFile(url,id){
     document.getElementById(`${id}button`).style=""
