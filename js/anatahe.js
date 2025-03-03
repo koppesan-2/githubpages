@@ -25,9 +25,9 @@ window.addEventListener("DOMContentLoaded",function(){
     loadsettings();
     document.getElementById("loadingcontent").innerText="ロード完了";
     document.getElementById("loadingdiv").setAttribute("class","loaded");
-    this.setTimeout(function(){ 
+    this.setTimeout(function(){
     document.getElementById("loadingdiv").style.display="none";
-    },2000);
+    },1000);
 })
 function loadsettings(){
     cookies=getCookieArray()
