@@ -16,12 +16,18 @@ function init(){
         cssvar("--frontcolor","white");
         cssvar("--backcolor","black");
     }}}
+
 }
 window.addEventListener("DOMContentLoaded",function(){
     var audioplay;
     var darkmode=document.getElementById("darkmodesetting");
     darkmode.addEventListener("change",darkmodechange);
     loadsettings();
+    document.getElementById("loadingcontent").innerText="ロード完了";
+    document.getElementById("loadingdiv").setAttribute("class","loaded");
+    this.setTimeout(function(){ 
+    document.getElementById("loadingdiv").style.display="none";
+    },2000);
 })
 function loadsettings(){
     cookies=getCookieArray()

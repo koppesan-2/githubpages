@@ -38,6 +38,10 @@ body {
     background-color: var(--backcolor);
     transition: 0.2s;
 }
+.loaded{
+    opacity: 0;
+    transition:2s,stransform 2s cubic-bezier(0.97, 0, 0.52, 0.9);
+}
 /* :::::: toggle button :::::: */
 #menuswitch {
 	display: none;
