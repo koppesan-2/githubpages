@@ -149,7 +149,7 @@ function volumeboostbuttonset(){
     volumebutton.type="range"
     volumebutton.id="volumebutton"
     volumebutton.setAttribute("oninput","volumeboost()")
-    volumebutton.setAttribute("max","6");
+    volumebutton.setAttribute("max","10");
     volumebutton.setAttribute("min","0");
     volumebutton.setAttribute("value","1");
     volumebutton.setAttribute("step","0.01");
@@ -163,7 +163,7 @@ function volumeboost(){
     volumelevel=document.getElementById("volumebutton").value
     volumeleveltext=Math.round(volumelevel*100)
     volumecontrol(audioplaygainnode,volumelevel)
-    document.getElementById("volumespan").innerText=`${volumeleveltext==0?"🔇"+volumeleveltext:volumeleveltext<100?"🔈"+volumeleveltext:volumeleveltext<200?"🔉"+volumeleveltext:volumeleveltext<300?"🔊"+volumeleveltext:volumeleveltext<400?"⚠"+volumeleveltext:"⚠警告⚠"+volumeleveltext}%`
+    document.getElementById("volumespan").innerText=`${volumeleveltext==0?"🔇"+volumeleveltext:volumeleveltext<100?"🔈"+volumeleveltext:volumeleveltext<200?"🔉"+volumeleveltext:volumeleveltext<300?"🔊"+volumeleveltext:volumeleveltext<400?"⚠"+volumeleveltext:volumeleveltext<800?"⚠警告⚠"+volumeleveltext:"🤯"+volumeleveltext}%`
 }
 function volumecontrol(id,level){
     id.gain.value=level
@@ -248,6 +248,7 @@ function deletecookie(){
         settingsave("scroll");
         settingsave("confirmed");
         settingsave("eazyui");
+        settingsave("redshow")
         document.getElementById("settingsave").checked=false;
         document.getElementById("cookiesetting").checked=false;
     }else{
@@ -268,12 +269,16 @@ function settingsaveon(){
     settingsave("darkmode",document.getElementById("darkmodesetting").checked,cookiemaxages);
     settingsave("scroll",document.getElementById("scrollcheck").checked,cookiemaxages);
     settingsave("eazyui",document.getElementById("eazyuisetting").checked,cookiemaxages);
+    settingsave("redshow",document.getElementById("redshow").checked,cookiemaxages);
 }
 function settingsavecancel(){
     document.getElementById("settingsave").checked=false;
     window.alert("キャンセルしました");
 }
-function cookieconfirmchange(){
+function cookieconfirmchange(user){
+    if(user&&document.getElementById("cookiesetting").checked==false){
+        window.alert("cookie消去を行うと、使用許可も外れます")
+    }
     document.cookie=`confirmed=true;max-age=${cookiemaxages}`
     document.getElementById("cookiesetting").checked=true;
 }
