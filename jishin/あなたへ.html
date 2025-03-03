@@ -9,7 +9,7 @@
 </head>
 <body>
 <!--ローディング画面-->
-<div id="loadingdiv" style="width:100%;height: 100dvh;margin:0;position: fixed;z-index:999;background-color:var(--backcolor);"><div id="loadingcontent" style="color:var(--frontcolor);position: absolute;top: 50%;left:50%;transform: translate(-50%,-50%);">ロード中...</div></div>
+<div id="loadingdiv" style="width:100%;height: 100%;margin:0;position: fixed;z-index:999;background-color:var(--backcolor);"><div id="loadingcontent" style="color:var(--frontcolor);position: absolute;top: 50%;left:50%;transform: translate(-50%,-50%);">ロード中...</div></div>
 <!--メニュー-->
 <input type="checkbox" id="menuswitch">
 <label for="menuswitch" class="open menulabel"><span></span></label>
@@ -31,7 +31,7 @@
     <li><label for="darkmodesetting"><div><span>ダークモード</span><br><input class="toggleswitch" id="darkmodesetting" type="checkbox"><label class="togglelabel" id="darkmodesettinglabel" for="darkmodesetting" /></div></label></li>
     <li><label for="eazyuisetting"><div><span>UIの省略</span><br><input onclick="eazyuichange()" class="toggleswitch" id="eazyuisetting" type="checkbox"><label class="togglelabel" id="eazyuisettinglabel" for="eazyuisetting" /></div></label></li>
     <li><label for="cookiesetting"><div><span>cookieの使用許可 | <button onclick="deletecookie()" id="deletecookie">cookie消去</button></span><br><input class="toggleswitch" onclick="cookieconfirmchange(true)" id="cookiesetting" type="checkbox"><label class="togglelabel" id="cookiesettinglabel" for="cookiesetting" /></div></label></li>
-    <li><div>version:202503031325</div></li>
+    <li><div>version:202503031327</div></li>
 </ul>
 </nav>
 <!--フロートメニュー-->
