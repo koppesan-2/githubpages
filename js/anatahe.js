@@ -128,8 +128,13 @@ function setDefault(id){
     if(elm){elm.remove()}
     elm=document.getElementById("volumespan")
     if(elm){elm.remove()}
+    elm=document.getElementById("playbr")
+    if(elm){elm.remove()}
     document.getElementById("floatmenu2").appendChild(motoname);
     document.getElementById("floatmenu2").appendChild(playaudio);
+    audiobr=document.createElement("br");
+    audiobr.id="playbr";
+    document.getElementById("floatmenu2").appendChild(audiobr)
     audioplay=document.getElementById("playaudio");
     audioplay.addEventListener("timeupdate",isscroll,false);
     audiocontext=new AudioContext();
