@@ -4,9 +4,10 @@ redtime=[12,24,30,42,53,58,64.5,70.2,76.2,81.8,93.8,99.7,111.8,119,128,134,140,1
 redtime2=[12,23,29,40.5,52,58,63.5,70.2,76.2,81.8,93.8,99.7,111.8,119,128,134,140,145.2,151,157,162.5,169.6,174,180,185.5,195.5,201,206.8,219];
 lyrics=30
 latestredcolor=-1
-audiocontext=new AudioContext();
-track=new AudioContext();
-audioplaygainnode=audiocontext.createGain();
+latestmusic=""
+audiocontext=""
+track=""
+audioplaygainnode=""
 function init(){
     cookiemaxages=7776000
     if(document.cookie.indexOf("confirmed")!==-1){
@@ -111,7 +112,8 @@ function showerror(em){
     error=em.indexOf("FetchError")!==-1?"データが取得できませんでした":em.indexOf("PredefinedID")!==-1?"このIDはすでに使用されています":em.indexOf("CookiesAreNotAllowed")!==-1?"cookieの使用が許可されていません":"不明なエラーが発生しました";
 
 }
-function setDefault(id){
+function setDefault(id,disboost=false){
+    latestmusic=id
     let motoname=document.getElementById(`${id}span`).cloneNode(true);
     motoname.id="playname";
     motoname.setAttribute("class","playnames");
@@ -119,34 +121,31 @@ function setDefault(id){
     let playaudio = moto.cloneNode();
     playaudio.id="playaudio";
     playaudio.setAttribute("class",`playingaudio plays${id}`);
-    let elm=document.getElementById("playname");
-    if(elm){elm.remove()}
-    elm=document.getElementById("playaudio");
-    if(elm){elm.remove()}
-    elm=document.getElementById("anaunsu")
-    if(elm){elm.remove()}
-    elm=document.getElementById("volumebutton")
-    if(elm){elm.remove()}
-    elm=document.getElementById("volumespan")
-    if(elm){elm.remove()}
-    elm=document.getElementById("playbr")
-    if(elm){elm.remove()}
+    removeelm("playname")
+    removeelm("playaudio")
+    removeelm("anaunsu")
+    removeelm("volumebutton")
+    removeelm("volumespan")
+    removeelm("playbr")
+    removeelm("volumetogglebutton")
+    removeelm("volumetogglelabel")
     document.getElementById("floatmenu2").appendChild(motoname);
     document.getElementById("floatmenu2").appendChild(playaudio);
+    audioplay=document.getElementById("playaudio");
+    audioplay.addEventListener("timeupdate",isscroll,false);
+    if(disboost!=true){
     audiobr=document.createElement("br");
     audiobr.id="playbr";
     document.getElementById("floatmenu2").appendChild(audiobr)
-    audioplay=document.getElementById("playaudio");
-    audioplay.addEventListener("timeupdate",isscroll,false);
     audiocontext=new AudioContext();
     audioplaygainnode=audiocontext.createGain();
     track=audiocontext.createMediaElementSource(audioplay);
     track.connect(audioplaygainnode).connect(audiocontext.destination);
-    volumeboostbuttonset();
+    }
+    volumeboostbuttonset(disboost);
+    togglebuttonset("floatmenu2","volumetoggle","volumeboostonoff()",true,disboost)
     autoclose();
-
 document.addEventListener("keydown",event=>{
-    console.log("あ")
     if(event.code==="KeyK"){
         if(document.getElementById("playaudio").paused){
             document.getElementById("playaudio").play()
@@ -156,7 +155,26 @@ document.addEventListener("keydown",event=>{
     }
 })
 }
-function volumeboostbuttonset(){
+function removeelm(id){
+    if(document.getElementById(id)){
+        document.getElementById(id).remove()
+    }
+}
+function togglebuttonset(id,name=id,com=undefined,mini=false,disboost=false){
+    button=document.createElement("input")
+    button.type="checkbox"
+    button.id=`${name}button`
+    button.setAttribute("class",mini?"minitoggleswitch":"toggleswitch")
+    button.setAttribute("onclick",com)
+    if(disboost){button.checked=false}else{button.checked=true}
+    label=document.createElement("label")
+    label.id=`${name}label`
+    label.setAttribute("class",mini?"minitogglelabel":"togglelabel")
+    label.setAttribute("for",`${name}button`)
+    document.getElementById(id).appendChild(button)
+    document.getElementById(id).appendChild(label)
+}
+function volumeboostbuttonset(disboost){
     volumebutton=document.createElement("input");
     volumebutton.type="range"
     volumebutton.id="volumebutton"
@@ -165,6 +183,9 @@ function volumeboostbuttonset(){
     volumebutton.setAttribute("min","0");
     volumebutton.setAttribute("value","1");
     volumebutton.setAttribute("step","0.01");
+    if(disboost==true){
+        volumebutton.setAttribute("disabled","");
+    }
     document.getElementById("floatmenu2").appendChild(volumebutton)
     volumespan=document.createElement("span");
     volumespan.id="volumespan"
@@ -180,8 +201,15 @@ function volumeboost(){
 function volumecontrol(id,level){
     id.gain.value=level
 }
+function volumeboostonoff(){
+    if(document.getElementById("volumetogglebutton").checked==true){
+        setDefault(latestmusic,false);
+    }else{
+        setDefault(latestmusic,true);
+    }
+}
 function autoclose(){
-    document.getElementById("menuswitch").click();
+    document.getElementById("menuswitch").checked=false;
 }
 function redshow(){
     document.getElementById("redshow").checked==true?settingsave("redshow",true,cookiemaxages):settingsave("redshow",false,cookiemaxages);
@@ -317,5 +345,13 @@ function eazyuichange(){
         settingsave("eazyui",false,cookiemaxages)
         document.getElementById("top").style.display="block";
         document.getElementById("gotop").style.display="block";
+    }
+}
+
+function floatopenclose(){
+    if(document.getElementById("floatmenuswitch").checked==true){
+        document.getElementById("floatmenu").setAttribute("class","closed")
+    }else{
+    document.getElementById("floatmenu").setAttribute("class","")
     }
 }
