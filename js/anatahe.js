@@ -251,7 +251,7 @@ function removeallreds(){
 }
 function redshowmove(time,type=redtime){
     for(i=type.length-1;type[i]>time;i--){};
-    if(i==-1){document.getElementById(0).style.backgroundColor="";latestredcolor=-1;return;};
+    if(i==-1){document.getElementById(0).style.backgroundColor="";document.getElementById(type.length-1).style.backgroundColor="";latestredcolor=-1;return;};
     if(latestredcolor==i){return;};
     if(latestredcolor!=-1){document.getElementById(latestredcolor).style.backgroundColor="";};
     document.getElementById(i).style.backgroundColor="red"
